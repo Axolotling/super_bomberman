@@ -22,6 +22,8 @@ double zwroc1(double x)
 
 int main()
 {
+	// NEW COMMENT
+	// 2
 	srand(time(0));
 	const int screen_width = 800;
 	const int screen_height = 800;
