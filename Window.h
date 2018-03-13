@@ -22,7 +22,7 @@ public:
 
 	void start()
 	{
-		sf::RenderWindow window(sf::VideoMode(width, height), "Snake");
+		sf::RenderWindow window(sf::VideoMode(width, height), "Bomberman");
 		mouse_interpreter = new MouseInterpreter(&window, view_manager);
 		window.setFramerateLimit(60);
 		bool was_left_button_pressed = false;

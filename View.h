@@ -26,7 +26,9 @@ public:
 		drawables.clear();
 	}
 
-
 	View(){};
-	~View(){};
+	~View()
+	{
+		delete_drawables();
+	};
 };

@@ -16,6 +16,7 @@
     <ClInclude Include="BombermanGameView.h" />
     <ClInclude Include="KeyboardSteering.h" />
     <ClInclude Include="MouseInterpreter.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="SnakeView.h" />
     <ClInclude Include="Steering.h" />

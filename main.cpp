@@ -49,8 +49,10 @@ int main()
 	manager->update();
 	thread thread_window(&Window::start, Window(screen_width, screen_height, manager));
 
-	//snake->loop();
+	//bomberman->loop();
 	
+
+
 	thread_window.join();
 
 	system("pause");
