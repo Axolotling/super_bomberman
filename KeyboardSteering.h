@@ -5,7 +5,7 @@
 class KeyboardSteering : public Steering
 {
 public:
-	Direction determine_direction() override
+	Action determine_direction() override
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{

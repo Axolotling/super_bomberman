@@ -30,7 +30,7 @@ private:
 	sf::Clock clock;
 	const int milliseconds_between_ticks = 200;
 	Steering *steering = nullptr;
-	Steering::Direction direction;
+	Steering::Action direction;
 
 
 	// Pola publiczne
@@ -93,7 +93,7 @@ public:
 		
 		while (!lost)
 		{
-			Steering::Direction temp_direction = steering->determine_direction();
+			Steering::Action temp_direction = steering->determine_direction();
 			if (temp_direction != Steering::NONE && temp_direction != direction - 2 && temp_direction != direction + 2)
 			{
 				direction = temp_direction;

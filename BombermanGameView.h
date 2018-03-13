@@ -22,27 +22,45 @@ public:
 	~BombermanGameView() {};
 
 // Private methods
-	void create_vertical_lines(double start_x, double start_y, double grid_cell_side, double line_weight = 2.0)
+	void create_vertical_grid_lines(double start_x, double start_y, double grid_cell_side, double line_weight = 2.0)
 	{
 		for (int i = 1; i < bomberman_game->board_width; i++)
 		{
-			sf::RectangleShape *stripe = new sf::RectangleShape(sf::Vector2f(line_weight, bomberman_game->board_height * grid_cell_side));
-			stripe->setPosition(start_x + grid_cell_side * i, start_y);
-			stripe->setFillColor(sf::Color(40, 40, 40));
-			drawables.push_back(stripe);
+			sf::RectangleShape *line = new sf::RectangleShape(sf::Vector2f(line_weight, bomberman_game->board_height * grid_cell_side));
+			line->setPosition(start_x + grid_cell_side * i, start_y);
+			line->setFillColor(sf::Color(40, 40, 40));
+			drawables.push_back(line);
 		}
 	}
 
-	void create_horizontal_lines(double start_x, double start_y, double grid_cell_side, double line_weight = 2.0)
+	void create_horizontal_grid_lines(double start_x, double start_y, double grid_cell_side, double line_weight = 2.0)
 	{
 		for (int i = 1; i < bomberman_game->board_height; i++)
 		{
-			sf::RectangleShape *stripe = new sf::RectangleShape(sf::Vector2f(bomberman_game->board_width * grid_cell_side, line_weight));
-			stripe->setPosition(start_x, start_y + grid_cell_side * i);
-			stripe->setFillColor(sf::Color(40, 40, 40));
-			drawables.push_back(stripe);
+			sf::RectangleShape *line = new sf::RectangleShape(sf::Vector2f(bomberman_game->board_width * grid_cell_side, line_weight));
+			line->setPosition(start_x, start_y + grid_cell_side * i);
+			line->setFillColor(sf::Color(40, 40, 40));
+			drawables.push_back(line);
 		}
 	}
+
+	void display_every_object_on_board(double start_x, double start_y, double grid_cell_side)
+	{
+		for (int x = 0; x < bomberman_game->board_width; x++)
+		{
+			for (int y = 0; y < bomberman_game->board_height; y++)
+			{
+				if (bomberman_game->board[x][y] != nullptr)
+				{
+					sf::CircleShape *circle = new sf::CircleShape(grid_cell_side / 2);
+					circle->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
+					circle->setFillColor(sf::Color(40, 40, 200));
+					drawables.push_back(circle);
+				}
+			}
+		}
+	};
+
 
 // Public methods
 public:	
@@ -51,9 +69,9 @@ public:
 		delete_drawables();
 		const double grid_cell_side = scale;
 
-		create_vertical_lines(x, y, grid_cell_side);
-		
-		create_horizontal_lines(x, y, grid_cell_side);
+		create_vertical_grid_lines(x, y, grid_cell_side);		
+		create_horizontal_grid_lines(x, y, grid_cell_side);
+		display_every_object_on_board(x, y, grid_cell_side);
 
 		//game background
 		create_background(x, y, bomberman_game->board_width*grid_cell_side, bomberman_game->board_height*grid_cell_side, sf::Color(200,150,0));

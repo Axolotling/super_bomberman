@@ -13,13 +13,6 @@
 using namespace std;
 
 
-class NeuralNetworkView;
-
-double zwroc1(double x)
-{
-	return 1/(1+exp(-x));
-}
-
 int main()
 {
 	// NEW COMMENT
@@ -30,7 +23,6 @@ int main()
 	const int board_width = 20;
 	const int board_height = 20;
 	
-
 	
 	//Snake* snake = new Snake(board_width,board_height,1, 1, 4);
 	//KeyboardSteering *steering = new KeyboardSteering();
@@ -40,19 +32,21 @@ int main()
 	
 	ViewManager *manager = new ViewManager;
 
-	BombermanGame bomberman(board_width, board_height);
-	BombermanGameView bomberman_view(&bomberman);
+	BombermanGame *bomberman = new BombermanGame(board_width, board_height);
+	BombermanGameView bomberman_view(bomberman);
+
+
+	printf("%d", bomberman);
+	
+	//Player bartek(bomberman, 1, 1);
 
 	manager->add_view(&bomberman_view, 0, 0, screen_width/board_width,screen_width, screen_height);
-	//manager->add_view(nn_view, 0, 0, 5, 600, 750, sf::Color(200, 200, 200));	
-	//	manager->add_view(&genetic_algorithm_manager_view,0,0,1,400,750);
 	manager->update();
+
 	thread thread_window(&Window::start, Window(screen_width, screen_height, manager));
 
 	//bomberman->loop();
 	
-
-
 	thread_window.join();
 
 	system("pause");

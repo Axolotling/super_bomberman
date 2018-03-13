@@ -1,35 +1,67 @@
 #pragma once
 #include "BoardObject.h"
+#include "Player.h"
 
+class Player;
+class BoardObject;
 
 class BombermanGame
 {
-	// Public definitions
+// Public definitions
 public:
-	// Private fields
+	///none
+
+// Private fields
 private:
-	BoardObject ***board; //board[x][y]->motoda() pozwala wywo³aæ metodê obiektu
+	Player* add_player(int x, int y)
+	{
+		Player* new_player = new Player(this, x, y);
+		players.push_front(new_player);
+		board[x][y] = new_player;
+		return new_player;
+	}
 
-	// Public fields
+// Public fields
 public:
-	const int board_width;
-	const int board_height;
+	// plansza - zawiera informacje o tym co znajduje siê w ka¿dym miejscu planszy
+	BoardObject ***board; //board[x][y]->metoda() pozwala wywo³aæ metodê obiektu
+	// wymiary siatki planszy gry
+	const int board_width, board_height;
+	std::list<Player*> players;
+	Player* local_player;
 
-	// Constructors and destructors
+	int publiczne_cos = 2;
+
+// Constructors and destructors
 	BombermanGame(const int &board_width, const int &board_height) :board_width(board_width), board_height(board_height)
 	{
 		board = new BoardObject**[board_width];
 		for (int i = 0; i < board_width; i++)
 		{
 			board[i] = new BoardObject*[board_height];
-			board[i] = nullptr;
+			for (int j = 0; j < board_height; j++)
+			{
+				board[i][j] = nullptr;
+			}
 		}
+		local_player = add_player(0, 0);
 	};
+
 	~BombermanGame() = default;
-	// Private methods
 
-	// Public methods
+// Private methods
+	///none
+// Public methods
 
+	// g³ówna pêtla gry
+	void loop()
+	{
+		
+		
+
+
+
+	}
 };
 
 
