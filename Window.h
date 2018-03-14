@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
+
 #include <SFML/Graphics.hpp>
 #include <list>
 #include "ViewManager.h"
@@ -108,3 +110,5 @@ public:
 	~Window(){};
 };
 	
+
+#endif

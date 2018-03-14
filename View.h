@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VIEW_H
+#define VIEW_H
+
 #include <SFML/Graphics.hpp>
 #include <list>
 //i->view->update(i->x, i->y, i->width, i->height, i->inner_offset_x, i->inner_offset_y, i->scale, i->background_color);
@@ -32,3 +34,5 @@ public:
 		delete_drawables();
 	};
 };
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SNAKE_H
+#define SNAKE_H
+
 #include <list>
 #include <thread>
 #include "KeyboardSteering.h"
@@ -181,3 +183,5 @@ public:
 	}	
 
 };
+
+#endif

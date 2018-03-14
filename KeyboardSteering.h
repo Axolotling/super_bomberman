@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KEYBOARDSTEERING_H
+#define KEYBOARDSTEERING_H
+
 #include "Steering.h"
 #include <SFML/Window/Keyboard.hpp>
 
@@ -29,3 +31,5 @@ public:
 	KeyboardSteering() {};
 	~KeyboardSteering() {};
 };
+
+#endif

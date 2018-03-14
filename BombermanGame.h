@@ -1,9 +1,10 @@
-#pragma once
-#include "BoardObject.h"
+#ifndef BOMBERMANGAME_H
+#define BOMBERMANGAME_H
+
+
+
 #include "Player.h"
 
-class Player;
-class BoardObject;
 
 class BombermanGame
 {
@@ -72,3 +73,5 @@ public:
 // Constructors and destructors
 // Private methods
 // Public methods
+
+#endif

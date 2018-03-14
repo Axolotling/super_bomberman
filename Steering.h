@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef STEERING_H
+#define STEERING_H
 
 
 class Steering
@@ -56,3 +56,5 @@ public:
 
  *
  */
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SNAKEVIEW_H
+#define SNAKEVIEW_H
+
 #include "View.h"
 #include "SFML/Graphics.hpp"
 #include "Snake.h"
@@ -33,3 +35,5 @@ public:
 		//View::update(offset_x, offset_y, scale, width, height, color);
 	}
 };
+
+#endif

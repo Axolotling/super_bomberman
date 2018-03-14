@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BOMBERMANGAMEVIEW_H
+#define BOMBERMANGAMEVIEW_H
+
 #include "View.h"
 #include "SFML/Graphics.hpp"
 #include "Snake.h"
@@ -52,6 +54,7 @@ public:
 			{
 				if (bomberman_game->board[x][y] != nullptr)
 				{
+
 					sf::CircleShape *circle = new sf::CircleShape(grid_cell_side / 2);
 					circle->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
 					circle->setFillColor(sf::Color(40, 40, 200));
@@ -79,3 +82,6 @@ public:
 		///create_background(x, y, bomberman_game->board_width*gridbase, bomberman_game->board_height*gridbase, color);
 	}
 };
+
+
+#endif

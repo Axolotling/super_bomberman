@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿#ifndef BOARDOBJECT_H
+#define BOARDOBJECT_H
+
 #include "BombermanGame.h"
 class BombermanGame;
 
@@ -18,7 +20,7 @@ public:
 	int board_x, board_y;
 	bool can_be_broken;
 	bool can_be_collided;
-	BombermanGame *bomberman_game;
+	BombermanGame *const bomberman_game;
 
 // Constructors and destructors
 	BoardObject(BombermanGame *const bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
@@ -35,3 +37,5 @@ public:
 // Public methods
 	///none
 };
+
+#endif

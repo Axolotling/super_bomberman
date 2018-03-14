@@ -1,7 +1,7 @@
-#pragma once
+#ifndef MOUSEINTERPRETER_H
+#define MOUSEINTERPRETER_H
+
 #include <SFML/Window/Mouse.hpp>
-#include "Window.h"
-//#include "SFML/"
 
 class MouseInterpreter 
 {
@@ -133,3 +133,4 @@ public:
 	}
 
 };
+#endif
