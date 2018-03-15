@@ -1,6 +1,6 @@
 .vs
 /x64
-/super_bomberman/.vs
-/super_bomberman/x64
+#/super_bomberman/.vs
+#/super_bomberman/x64
 /super_bomberman/*.filters
 /super_bomberman/*.user
