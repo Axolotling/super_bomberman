@@ -1,7 +1,7 @@
 ﻿#ifndef BOARDOBJECT_H
 #define BOARDOBJECT_H
 
-#include "BombermanGame.h"
+
 class BombermanGame;
 
 // Klasa abstrakcyjna, która opisuje obiekt który może zostać umieszczony na planszy gry
@@ -23,7 +23,7 @@ public:
 	BombermanGame *const bomberman_game;
 
 // Constructors and destructors
-	BoardObject(BombermanGame *const bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
+	BoardObject(BombermanGame* bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
 	board_x(board_x), 
 	board_y(board_y),	
 	can_be_broken(can_be_broken),

@@ -1,10 +1,10 @@
 #ifndef BOMBERMANGAME_H
 #define BOMBERMANGAME_H
+#include <list>
 
 
-
-#include "Player.h"
-
+class Player;
+class BoardObject;
 
 class BombermanGame
 {
@@ -14,13 +14,7 @@ public:
 
 // Private fields
 private:
-	Player* add_player(int x, int y)
-	{
-		Player* new_player = new Player(this, x, y);
-		players.push_front(new_player);
-		board[x][y] = new_player;
-		return new_player;
-	}
+	Player* add_player(int x, int y);
 
 // Public fields
 public:
@@ -34,19 +28,7 @@ public:
 	int publiczne_cos = 2;
 
 // Constructors and destructors
-	BombermanGame(const int &board_width, const int &board_height) :board_width(board_width), board_height(board_height)
-	{
-		board = new BoardObject**[board_width];
-		for (int i = 0; i < board_width; i++)
-		{
-			board[i] = new BoardObject*[board_height];
-			for (int j = 0; j < board_height; j++)
-			{
-				board[i][j] = nullptr;
-			}
-		}
-		local_player = add_player(0, 0);
-	};
+	BombermanGame(const int& board_width, const int& board_height);;
 
 	~BombermanGame() = default;
 
@@ -55,15 +37,9 @@ public:
 // Public methods
 
 	// g³ówna pêtla gry
-	void loop()
-	{
-		
-		
-
-
-
-	}
+	void loop();
 };
+
 
 
 

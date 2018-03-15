@@ -45,7 +45,7 @@ int main()
 
 	thread thread_window(&Window::start, Window(screen_width, screen_height, manager));
 
-	//bomberman->loop();
+	bomberman->loop();
 	
 	thread_window.join();
 
