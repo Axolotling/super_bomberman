@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "Snake.h"
 #include "BombermanGame.h"
+#include "Player.h"
 
 class BombermanGameView : public View
 {
@@ -54,10 +55,19 @@ public:
 			{
 				if (bomberman_game->board[x][y] != nullptr)
 				{
-
-					sf::CircleShape *circle = new sf::CircleShape(grid_cell_side / 2);
-					circle->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
+					sf::CircleShape *circle = new sf::CircleShape(grid_cell_side / 2);					
 					circle->setFillColor(sf::Color(40, 40, 200));
+					Player* player;
+					if (player = dynamic_cast<Player*>(bomberman_game->board[x][y]))
+					{
+						circle->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
+					}
+					else
+					{
+						circle->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
+					}
+
+				
 					drawables.push_back(circle);
 				}
 			}

@@ -7,16 +7,16 @@ class Steering
 public:
 	enum Action
 	{
-		UP,
-		RIGHT,
-		DOWN,
-		LEFT,
+		GO_UP,
+		GO_RIGHT,
+		GO_DOWN,
+		GO_LEFT,
 		NONE,
 		BOMB,
 		EXIT
 	};
 	
-	virtual Action determine_direction() = 0;
+	virtual Action determine_action() = 0;
 	
 	Steering() {}
 	~Steering() {};

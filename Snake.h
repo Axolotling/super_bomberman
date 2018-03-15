@@ -52,7 +52,7 @@ public:
 		{
 			body.push_back(new Segment(x, ++y));
 		}
-		direction = Steering::UP;
+		direction = Steering::GO_UP;
 
 		determine_new_food_position();
 	}
@@ -95,7 +95,7 @@ public:
 		
 		while (!lost)
 		{
-			Steering::Action temp_direction = steering->determine_direction();
+			Steering::Action temp_direction = steering->determine_action();
 			if (temp_direction != Steering::NONE && temp_direction != direction - 2 && temp_direction != direction + 2)
 			{
 				direction = temp_direction;
@@ -127,13 +127,13 @@ public:
 						previous_y = segment->y;
 						switch (direction)
 						{
-						case Steering::UP:		segment->y--;
+						case Steering::GO_UP:		segment->y--;
 							break;
-						case Steering::DOWN:	segment->y++;
+						case Steering::GO_DOWN:	segment->y++;
 							break;
-						case Steering::LEFT:	segment->x--;
+						case Steering::GO_LEFT:	segment->x--;
 							break;
-						case Steering::RIGHT:	segment->x++;
+						case Steering::GO_RIGHT:	segment->x++;
 							break;
 						}
 						if (segment->x >= board_width)

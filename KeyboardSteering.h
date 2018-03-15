@@ -7,23 +7,23 @@
 class KeyboardSteering : public Steering
 {
 public:
-	Action determine_direction() override
+	Action determine_action() override
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			return LEFT;
+			return GO_LEFT;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			return RIGHT;
+			return GO_RIGHT;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			return UP;
+			return GO_UP;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			return DOWN;
+			return GO_DOWN;
 		}
 		return NONE;
 	};

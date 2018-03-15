@@ -18,6 +18,7 @@ public:
 	};
 
 // Private fields
+	double exact_x, exact_y;
 	double x_velocity, y_velocity;
 	void move_player(double x, double y);
 // Public fields

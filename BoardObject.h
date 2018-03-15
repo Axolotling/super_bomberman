@@ -20,7 +20,7 @@ public:
 	int board_x, board_y;
 	bool can_be_broken;
 	bool can_be_collided;
-	BombermanGame *const bomberman_game;
+	BombermanGame* bomberman_game;
 
 // Constructors and destructors
 	BoardObject(BombermanGame* bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
@@ -30,7 +30,7 @@ public:
 	can_be_collided(can_be_collided),
 	bomberman_game(bomberman_game) {};
 	
-	~BoardObject(){};
+	virtual ~BoardObject(){};
 	
 // Private methods
 	///none
