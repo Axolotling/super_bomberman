@@ -14,9 +14,11 @@
     <ClInclude Include="BoardObject.h" />
     <ClInclude Include="BombermanGame.h" />
     <ClInclude Include="BombermanGameView.h" />
+    <ClInclude Include="Crate.h" />
     <ClInclude Include="KeyboardSteering.h" />
     <ClInclude Include="MouseInterpreter.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="SnakeView.h" />
     <ClInclude Include="Steering.h" />

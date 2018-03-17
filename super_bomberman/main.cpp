@@ -36,7 +36,7 @@ int main()
 	BombermanGameView bomberman_view(bomberman);
 
 
-	printf("%d", bomberman);
+	//printf("%d", bomberman);
 	
 	//Player bartek(bomberman, 1, 1);
 

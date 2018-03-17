@@ -1,5 +1,7 @@
 ﻿#ifndef BOARDOBJECT_H
 #define BOARDOBJECT_H
+#include <SFML/Graphics/Drawable.hpp>
+#include <list>
 
 
 class BombermanGame;
@@ -31,11 +33,10 @@ public:
 	bomberman_game(bomberman_game) {};
 	
 	virtual ~BoardObject(){};
-	
+
 // Private methods
 	///none
 // Public methods
 	///none
 };
-
 #endif

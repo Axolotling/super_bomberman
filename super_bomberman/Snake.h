@@ -1,4 +1,4 @@
-#ifndef SNAKE_H
+#ifdef SNAKE_H
 #define SNAKE_H
 
 #include <list>
