@@ -60,6 +60,7 @@ public:
 					Player* player;
 					if (player = dynamic_cast<Player*>(bomberman_game->board[x][y]))
 					{
+
 						circle->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
 					}
 					else

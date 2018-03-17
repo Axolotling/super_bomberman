@@ -33,7 +33,7 @@ public:
 	~BombermanGame() = default;
 
 // Private methods
-	///none
+	double apply_friction_to_speed(const double& friction, double speed);
 // Public methods
 
 	// g³ówna pêtla gry

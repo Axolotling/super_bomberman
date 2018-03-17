@@ -16,7 +16,7 @@ public:
 		EXIT
 	};
 	
-	virtual Action determine_action() = 0;
+	virtual std::list<Action> determine_action() = 0;
 	
 	Steering() {}
 	~Steering() {};
