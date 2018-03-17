@@ -51,6 +51,7 @@
     <ClInclude Include="Rock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
