@@ -14,12 +14,12 @@ Player* BombermanGame::add_player(int x, int y)
 	return new_player;
 }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
-BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
-=======
+//BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
+//=======
 BombermanGame::BombermanGame()
->>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
+//>>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
 {
 	this->board = new Board();
 	local_player = add_player(0, 0);

@@ -1,6 +1,7 @@
 #ifndef BOMBERMANGAME_H
 #define BOMBERMANGAME_H
 #include <list>
+#include "BoardObject.h"
 
 
 class Player;
@@ -19,26 +20,26 @@ private:
 // Public fields
 public:
 	// plansza - zawiera informacje o tym co znajduje siê w ka¿dym miejscu planszy
-<<<<<<< HEAD
-	BoardObject ***board; //board[x][y]->metoda() pozwala wywo³aæ metodê obiektu
+//<<<<<<< HEAD
+	//BoardObject ***board; //board[x][y]->metoda() pozwala wywo³aæ metodê obiektu
 	// wymiary siatki planszy gry
 	int board_width, board_height;
-=======
+//=======
 	Board* board;
->>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
+//>>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
 	std::list<Player*> players;
 	Player* local_player;
 
 	int publiczne_cos = 2;
 
 // Constructors and destructors
-<<<<<<< HEAD
-	BombermanGame(const int& board_width, const int& board_height);;
+//<<<<<<< HEAD
+//	BombermanGame(const int& board_width, const int& board_height);;
 	
-=======
+//=======
 	BombermanGame();
 
->>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
+//>>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
 	~BombermanGame() = default;
 
 // Private methods
