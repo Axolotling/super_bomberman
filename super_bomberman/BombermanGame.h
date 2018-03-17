@@ -21,7 +21,7 @@ public:
 	// plansza - zawiera informacje o tym co znajduje siê w ka¿dym miejscu planszy
 	BoardObject ***board; //board[x][y]->metoda() pozwala wywo³aæ metodê obiektu
 	// wymiary siatki planszy gry
-	const int board_width, board_height;
+	int board_width, board_height;
 	std::list<Player*> players;
 	Player* local_player;
 
@@ -29,7 +29,7 @@ public:
 
 // Constructors and destructors
 	BombermanGame(const int& board_width, const int& board_height);;
-
+	
 	~BombermanGame() = default;
 
 // Private methods

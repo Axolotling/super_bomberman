@@ -13,6 +13,7 @@ Player* BombermanGame::add_player(int x, int y)
 	return new_player;
 }
 
+
 BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
 {
 	board = new BoardObject**[board_width];
