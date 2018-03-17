@@ -38,7 +38,7 @@ int main()
 	BombermanGame *bomberman = new BombermanGame(board_width, board_height);
 	BombermanGameView bomberman_view(bomberman);
 
-
+	    //fsdfs
 	//printf("%d", bomberman);
 	
 	//Player bartek(bomberman, 1, 1);
