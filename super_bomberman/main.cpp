@@ -8,15 +8,18 @@
 #include "Window.h"
 #include "BombermanGame.h"
 #include "BombermanGameView.h"
+#include <map>
+#include <tuple>
 
-
+#define G(i) get<i>(a->first);
 using namespace std;
 
 
 int main()
 {
+	//map<tuple<int, int>, BoardObject* > *a;
 	
-	
+	//G(2) / G(3);
 
 	// NEW COMMENT
 	// 2

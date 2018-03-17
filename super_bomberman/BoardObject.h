@@ -2,6 +2,11 @@
 #define BOARDOBJECT_H
 #include <SFML/Graphics/Drawable.hpp>
 #include <list>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <iostream>
 
 
 class BombermanGame;
@@ -37,6 +42,21 @@ public:
 // Private methods
 	///none
 // Public methods
-	///none
+	virtual sf::Sprite* get_graphical_representation()
+	{
+		sf::Sprite* sprite = new sf::Sprite;
+		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
+		sf::Texture *texture = new sf::Texture;
+
+		if (!texture->loadFromFile("question.png"))
+		{
+			std::cout << "Grafika obiektu się nie załadowała";
+		}
+		
+		sprite->setTexture(*texture);
+		sprite->setTextureRect(sf::IntRect(0, 0,texture->getSize().x,texture->getSize().y));
+
+		return sprite;
+	}
 };
 #endif
