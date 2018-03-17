@@ -56,18 +56,32 @@ public:
 			{
 				if (bomberman_game->board->get_object({ x,y }) != nullptr)
 				{
-					sf::CircleShape *circle = new sf::CircleShape(grid_cell_side / 2);					
-					circle->setFillColor(sf::Color(40, 40, 200));
+					sf::Sprite *sprite = bomberman_game->board->get_object({x,y})->get_graphical_representation();
+					sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
+
+					//sf::CircleShape *sprite = new sf::CircleShape(grid_cell_side / 2);					
+					//sprite->setFillColor(sf::Color(40, 40, 200));
+
 					Player* player;
 					if (player = dynamic_cast<Player*>(bomberman_game->board->get_object({ x,y })))
 					{
-						circle->setPosition(start_x + grid_cell_side * float(player->exact_x), start_y + grid_cell_side * float(player->exact_y));
+//<<<<<<< HEAD
+	//					circle->setPosition(start_x + grid_cell_side * float(player->exact_x), start_y + grid_cell_side * float(player->exact_y));
+//=======
+						sprite->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
+//>>>>>>> adding_new_board_objects*/
 					}
 					else
 					{
-						circle->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
+						sprite->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
 					}
+/*<<<<<<< HEAD
 					drawables.push_back(circle);
+=======
+*/
+				
+					drawables.push_back(sprite);
+//>>>>>>> adding_new_board_objects
 				}
 			}
 		}

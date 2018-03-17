@@ -5,6 +5,7 @@
 #include "Board.h"
 #include <iostream>
 #include <SFML/System/Clock.hpp>
+#include "Crate.h"
 
 Player* BombermanGame::add_player(int x, int y)
 {
@@ -23,6 +24,8 @@ BombermanGame::BombermanGame()
 {
 	this->board = new Board();
 	local_player = add_player(0, 0);
+
+	board->set_object({ 6,6 }, new Crate(this, 6, 6));
 }
 
 // note that friction and speed should be related to the same time period
