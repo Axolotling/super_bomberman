@@ -11,7 +11,7 @@ public:
 
 	virtual void update(double x, double y, double width = 0.0, double height = 0.0, double inner_offset_x = 0.0 , double inner_offset_y = 0.0, double scale = 1.0, sf::Color color = sf::Color::Transparent) = 0;
 
-	void create_background(double x, double y, double background_width = 0.0, double background_height = 0.0, sf::Color color = sf::Color::Black)
+	void create_background(float x, float y, float background_width = 0.0, float background_height = 0.0, sf::Color color = sf::Color::Black)
 	{
 		if (background_width * background_height > 0)
 		{

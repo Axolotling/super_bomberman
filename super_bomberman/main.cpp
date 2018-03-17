@@ -20,7 +20,7 @@ int main()
 
 	// NEW COMMENT
 	// 2
-	srand(time(0));
+	srand(time_t(0));
 	const int screen_width = 800;
 	const int screen_height = 800;
 	const int board_width = 20;
@@ -35,10 +35,9 @@ int main()
 	
 	ViewManager *manager = new ViewManager;
 
-	BombermanGame *bomberman = new BombermanGame(board_width, board_height);
+	BombermanGame *bomberman = new BombermanGame();
 	BombermanGameView bomberman_view(bomberman);
 
-	    //fsdfs
 	//printf("%d", bomberman);
 	
 	//Player bartek(bomberman, 1, 1);
