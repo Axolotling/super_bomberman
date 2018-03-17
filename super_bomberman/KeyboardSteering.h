@@ -7,25 +7,31 @@
 class KeyboardSteering : public Steering
 {
 public:
-	Action determine_action() override
+	std::list<Action> determine_action() override
 	{
+		std::list<Action> actions;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			return GO_LEFT;
+			actions.push_front(GO_LEFT);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			return GO_RIGHT;
+			actions.push_front(GO_RIGHT);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			return GO_UP;
+			actions.push_front(GO_UP);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			return GO_DOWN;
+			actions.push_front(GO_DOWN);
 		}
-		return NONE;
+
+		if (actions.empty())
+		{
+			actions.push_front(NONE);
+		}
+		return actions;
 	};
 
 	KeyboardSteering() {};
