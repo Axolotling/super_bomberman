@@ -7,7 +7,9 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <iostream>
+#include <set>
 
+#define epsilon 0.00001
 
 class BombermanGame;
 
@@ -59,20 +61,36 @@ public:
 		return sprite;
 	}
 
-	void collider(double x, double y)
+	enum collision
+	{
+		top,
+		right,
+		bottom,
+		left,
+		none
+	};
+
+
+	std::set<collision> collider(double x, double y, double w, double h)
 	{
 		if (can_be_collided)
 		{
 			//coś
-			if (x + 1 >= board_x && x <= board_x + 1)
-			{
-				if (y + 1 >= board_y && y <= board_y + 1)
-				{
+			std::set<collision> collisions;
 
-				}
-			}
-			//finish it
+			// sprawdź górną kolizję
+			if (y >= board_y + 0.5 && y < board_y + 1) collisions.insert(top);
+			else
+			// sprawdź prawą kolizję
+			if (x + w - epsilon > board_x && x + w <= board_x + 0.5) collisions.insert(right);
+			else
+			// sprawdź dolną kolizję
+			if (y + h > board_y && y + h <= board_y + 0.5) collisions.insert(bottom);
+			// sprawdź lewą kolizję
+			else
+			if (x >= board_x + 0.5 && x - epsilon < board_x + 1) collisions.insert(left);
 
+			return collisions;
 		}
 
 	}

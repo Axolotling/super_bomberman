@@ -26,6 +26,8 @@ BombermanGame::BombermanGame()
 	local_player = add_player(0, 0);
 
 	board->set_object({ 6,6 }, new Crate(this, 6, 6));
+
+	board->set_object({ 8,6 }, new Crate(this, 8, 6));
 }
 
 // note that friction and speed should be related to the same time period
