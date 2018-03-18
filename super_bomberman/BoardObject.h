@@ -38,8 +38,18 @@ public:
 	board_y(board_y),	
 	can_be_broken(can_be_broken),
 	can_be_collided(can_be_collided),
-	bomberman_game(bomberman_game) {};
+	bomberman_game(bomberman_game)
+	{
+		
+		if (!texture->loadFromFile("question.png"))
+		{
+			std::cout << "Grafika obiektu się nie załadowała";
+		}
+
+	};
 	
+
+
 	virtual ~BoardObject(){};
 
 // Private methods
@@ -51,10 +61,7 @@ public:
 		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
 		
 
-		if (!texture->loadFromFile("question.png"))
-		{
-			std::cout << "Grafika obiektu się nie załadowała";
-		}
+		
 		
 		sprite->setTexture(*texture);
 		sprite->setTextureRect(sf::IntRect(0, 0,texture->getSize().x,texture->getSize().y));
