@@ -19,17 +19,8 @@ public:
 		this->bomberman_game = bomberman_game;
 		this->board_width = 15; //aktualnie tylko stosunek 3:2 ma sens, inne nie dzia³aja poprawnie
 		this->board_height = 10;
-		//dodanie stalej kamiennej ramki
-		for (int i = 0; i < this->board_width; i++)
-		{
-			set_object({ 0,i }, new Rock(bomberman_game, 0, i));
-			set_object({ this->board_width - 1,i }, new Rock(bomberman_game, this->board_width - 1, i));
-			if (i != 0 && i != this->board_width - 1)
-			{
-				set_object({ i,0 }, new Rock(bomberman_game, i, 0));
-				set_object({ i,this->board_height - 1 }, new Rock(bomberman_game, i, this->board_height - 1));
-			}
-		}
+		generating_frame();
+		
 		//sprawdzenie liczby graczy
 		assert(n_players!=0);
 		add_player(1,1); 
@@ -37,6 +28,15 @@ public:
 		if(n_players>2)add_player(this->board_width - 2,1);
 		if(n_players>3)add_player(1, this->board_height - 2);
 	}
+	//zwraca poczatek mapy
+	auto begin()
+		{
+		return board.begin();
+		}
+	auto end()
+		{
+		return board.end();
+		}
 	//zwraca parê (szerokosc,wysokosc) rozmiaru wygenerowanej planszy
 	pair<int, int>get_map_size()
 	{
@@ -81,6 +81,21 @@ private:
 
 	int board_width;
 	int board_height;
+
+	//dodanie stalej kamiennej ramki
+	void generating_frame()
+		{
+		for (int i = 0; i < this->board_width; i++)
+		{
+			set_object({ i,0 }, new Rock(bomberman_game, i, 0));
+			set_object({ i,this->board_height - 1 }, new Rock(bomberman_game, i, this->board_height - 1));
+			if (i != 0 && i<this->board_height-1)
+			{
+				set_object({ 0,i }, new Rock(bomberman_game, 0,i));
+				set_object({ this->board_width - 1,i }, new Rock(bomberman_game,this->board_width - 1,i));
+			}
+		}
+		}
 
 	void add_player(int x, int y)
 	{
