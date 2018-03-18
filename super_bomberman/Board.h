@@ -12,8 +12,8 @@ class Board
 public:
 	Board() //w konstruktorze sobie wygenerujemy jakas mapke
 		{
-		this->board_width = 30;
-		this->board_height = 30;
+		this->board_width = 20;
+		this->board_height = 20;
 		}
 	pair<int, int>get_map_size() //zwraca parê (szerokosc,wysokosc) rozmiaru wygenerowanej planszy
 		{

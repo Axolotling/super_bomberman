@@ -9,7 +9,7 @@
 
 Player* BombermanGame::add_player(int x, int y)
 {
-	Player* new_player = new Player(this, x, y);
+	Player* new_player = new Player(this, x+1, y+1);
 	players.push_front(new_player);
 	this->board->set_object({x,y},new_player); //dodajemy obiekt gracza na pozycje x,y (BR)
 	return new_player;
