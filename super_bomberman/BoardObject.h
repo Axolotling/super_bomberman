@@ -29,6 +29,7 @@ public:
 	int board_x, board_y;
 	bool can_be_broken;
 	bool can_be_collided;
+	bool requires_update;
 	BombermanGame* bomberman_game;
 	sf::Texture *texture = new sf::Texture;
 
@@ -38,7 +39,10 @@ public:
 	board_y(board_y),	
 	can_be_broken(can_be_broken),
 	can_be_collided(can_be_collided),
-	bomberman_game(bomberman_game) {};
+	bomberman_game(bomberman_game)
+	{
+		requires_update = false;
+	};
 	
 	virtual ~BoardObject(){};
 

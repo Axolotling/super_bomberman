@@ -53,6 +53,9 @@ public:
 			{
 				if (bomberman_game->board->get_object({ x,y }) != nullptr)
 				{
+					if (!bomberman_game->board->get_object({ x,y })->requires_update)
+						continue;
+
 					sf::Sprite *sprite = bomberman_game->board->get_object({x,y})->get_graphical_representation();
 					sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
 

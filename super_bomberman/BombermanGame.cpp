@@ -6,9 +6,9 @@
 #include <iostream>
 #include <SFML/System/Clock.hpp>
 #include "Crate.h"
-<<<<<<< HEAD
-=======
 #include <Windows.h>
+
+/*
 Player* BombermanGame::add_player(int x, int y)
 {
 	Player* new_player = new Player(this, x+1, y+1);
@@ -16,7 +16,7 @@ Player* BombermanGame::add_player(int x, int y)
 	this->board->set_object({x,y},new_player); //dodajemy obiekt gracza na pozycje x,y (BR)
 	return new_player;
 }
->>>>>>> adding_new_board_objects
+*/
 
 //<<<<<<< HEAD
 
@@ -66,11 +66,14 @@ void BombermanGame::loop()
 
 	double max_v_fields_per_second = 6;
 	double max_v_fields_per_tick = max_v_fields_per_second / tickrate;
+	double milliseconds = milliseconds_between_ticks / 4;
 
 	while (true)
 	{
 		bool tick = false;
-		Sleep(milliseconds_between_ticks / 4);
+
+		
+		//Sleep(milliseconds);
 		/*
 		 * velocity = blocks per second
 		 */
@@ -83,7 +86,7 @@ void BombermanGame::loop()
 
 
 		if (tick)
-		{
+		{			
 			if (local_player->board_x < board->get_map_size().first-1)
 			{
 				bool pressed_up_or_down = false;
