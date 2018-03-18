@@ -9,7 +9,7 @@
 #include <iostream>
 #include <set>
 
-#define epsilon 0.00001
+#define epsilon 0.1
 
 class BombermanGame;
 
@@ -41,7 +41,7 @@ public:
 	can_be_collided(can_be_collided),
 	bomberman_game(bomberman_game)
 	{
-		requires_update = false;
+		requires_update = true;
 	};
 	
 	virtual ~BoardObject(){};
@@ -51,9 +51,7 @@ public:
 // Public methods
 	virtual sf::Sprite* get_graphical_representation()
 	{
-		sf::Sprite* sprite = new sf::Sprite;
-		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
-		
+		sf::Sprite* sprite = new sf::Sprite;	
 
 		if (!texture->loadFromFile("question.png"))
 		{
@@ -75,53 +73,23 @@ public:
 		none
 	};
 
-	//*/
-/*	collision collider(double x, double y, double w, double h)
-=======
-		left,
-		none
-	};
-	*/
-
 	std::set<collision> collider(double x, double y, double w, double h)
-//>>>>>>> generating_map
 	{
 		if (can_be_collided)
 		{
+		std::set<collision> collisions;
 
-			
-			//coś
-/*<<<<<<< HEAD
+			if (x + w - epsilon > board_x && x + epsilon < board_x + 1)
+				if (y > board_y) collisions.insert(top);
+				else collisions.insert(bottom);			
 
-			// sprawdź górną kolizję
-			if (y >= board_y + 0.5 && y <= board_y + 1) return top;
-			// sprawdź prawą kolizję
-			if (x + w >= board_x && x + w <= board_x + 0.5) return right;
-			// sprawdź dolną kolizję
-			if (y + h >= board_y && y + h <= board_y + 0.5) return bottom;
-			// sprawdź lewą kolizję
-			if (x >= board_x + 0.5 && x <= board_x + 1) return left;
-
-=======
-*/			std::set<collision> collisions;
-
-			// sprawdź górną kolizję
-			if (y >= board_y + 0.5 && y < board_y + 1) collisions.insert(top);
-			else
-			// sprawdź prawą kolizję
-			if (x + w - epsilon > board_x && x + w <= board_x + 0.5) collisions.insert(right);
-			else
-			// sprawdź dolną kolizję
-			if (y + h > board_y && y + h <= board_y + 0.5) collisions.insert(bottom);
-			// sprawdź lewą kolizję
-			else
-			if (x >= board_x + 0.5 && x - epsilon < board_x + 1) collisions.insert(left);
-//>>>>>>> generating_map
+			if (y + h - epsilon > board_y && y + epsilon < board_y + 1) 
+				if(x < board_x) collisions.insert(right);
+				else collisions.insert(left);			
 
 			return collisions;
 		}
+	}	
 
-	}
-	
 };
 #endif

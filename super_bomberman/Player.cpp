@@ -6,7 +6,8 @@
 
 void Player::move_player(double x_difference, double y_difference)
 {
-	
+	requires_update = true;
+
 	int remembered_board_x = board_x, remembered_board_y = board_y;
 	int board_width = bomberman_game->board->get_map_size().first;
 	int board_height = bomberman_game->board->get_map_size().second;
@@ -46,7 +47,7 @@ void Player::move_player(double x_difference, double y_difference)
 Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& board_y) : BoardObject(
 	bomberman_game, board_x, board_y, true, true)
 {
-	requires_update = true;
+	
 	orientation = north;
 	x_velocity = 0;
 	y_velocity = 0;
@@ -57,12 +58,7 @@ Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& boa
 
 
 std::set<BoardObject::collision> Player::check_collisions()
-{
-//<<<<<<< HEAD
-	
-//=======
-
-	
+{	
 	std::set<collision> set_of_collisions;
 	for (int x = exact_x; x < exact_x+1; x++)
 	{
