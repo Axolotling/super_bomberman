@@ -78,44 +78,24 @@ public:
 		none
 	};
 
-	//*/
-/*	collision collider(double x, double y, double w, double h)
-=======
-		left,
-		none
-	};
-	*/
+
 
 	std::set<collision> collider(double x, double y, double w, double h)
-//>>>>>>> generating_map
 	{
 		if (can_be_collided)
 		{
 			std::set<collision> collisions;
 
-			if (x + w - epsilon > board_x && x + epsilon < board_x + 1 && y > board_y) collisions.insert(top);
-
-			if (y + h - epsilon > board_y && y + epsilon < board_y + 1 && x < board_x) collisions.insert(right);
-
-			if (x + w - epsilon > board_x && x + epsilon < board_x + 1 && y < board_y) collisions.insert(bottom);
-
-			if (y + h - epsilon > board_y && y + epsilon < board_y + 1 && x > board_x) collisions.insert(left);
+			if (x + w - epsilon > board_x && x + epsilon < board_x + 1)
+				if (y > board_y) collisions.insert(top);
+				else collisions.insert(bottom);
 			
+
+			if (y + h - epsilon > board_y && y + epsilon < board_y + 1) 
+				if(x < board_x) collisions.insert(right);
+				else collisions.insert(left);		
+
 			
-			
-			/*
-			// sprawdź górną kolizję
-			if (y >= board_y + 0.5 && y < board_y + 1) collisions.insert(top);
-			else
-			// sprawdź prawą kolizję
-			if (x + w - epsilon > board_x && x + w <= board_x + 0.5) collisions.insert(right);
-			else
-			// sprawdź dolną kolizję
-			if (y + h > board_y && y + h <= board_y + 0.5) collisions.insert(bottom);
-			// sprawdź lewą kolizję
-			else
-			if (x >= board_x + 0.5 && x - epsilon < board_x + 1) collisions.insert(left);
-			*/
 			return collisions;
 		}
 
