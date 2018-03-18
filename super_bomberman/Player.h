@@ -29,7 +29,9 @@ public:
 
 // Private methods
 // Public methods
-	void check_collision_with(BoardObject* board_object);
+	std::set<collision> check_collision_with(BoardObject* board_object);
+
+	std::set<collision> check_collisions();
 };
 
 

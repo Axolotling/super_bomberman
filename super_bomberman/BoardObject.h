@@ -9,6 +9,7 @@
 #include <iostream>
 #include <set>
 
+#define epsilon 0.00001
 
 class BombermanGame;
 
@@ -65,15 +66,25 @@ public:
 		top,
 		right,
 		bottom,
+//<<<<<<< HEAD
 		left
 	};
 
+	//*/
+/*	collision collider(double x, double y, double w, double h)
+=======
+		left,
+		none
+	};
+	*/
 
-	collision collider(double x, double y, double w, double h)
+	std::set<collision> collider(double x, double y, double w, double h)
+//>>>>>>> generating_map
 	{
 		if (can_be_collided)
 		{
 			//coś
+/*<<<<<<< HEAD
 
 
 			// sprawdź górną kolizję
@@ -85,7 +96,23 @@ public:
 			// sprawdź lewą kolizję
 			if (x >= board_x + 0.5 && x <= board_x + 1) return left;
 
+=======
+*/			std::set<collision> collisions;
 
+			// sprawdź górną kolizję
+			if (y >= board_y + 0.5 && y < board_y + 1) collisions.insert(top);
+			else
+			// sprawdź prawą kolizję
+			if (x + w - epsilon > board_x && x + w <= board_x + 0.5) collisions.insert(right);
+			else
+			// sprawdź dolną kolizję
+			if (y + h > board_y && y + h <= board_y + 0.5) collisions.insert(bottom);
+			// sprawdź lewą kolizję
+			else
+			if (x >= board_x + 0.5 && x - epsilon < board_x + 1) collisions.insert(left);
+//>>>>>>> generating_map
+
+			return collisions;
 		}
 
 	}
