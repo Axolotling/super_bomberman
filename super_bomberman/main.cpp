@@ -8,19 +8,22 @@
 #include "Window.h"
 #include "BombermanGame.h"
 #include "BombermanGameView.h"
+#include <map>
+#include <tuple>
 
-
+#define G(i) get<i>(a->first);
 using namespace std;
 
 
 int main()
 {
+	//map<tuple<int, int>, BoardObject* > *a;
 	
-	
+	//G(2) / G(3);
 
 	// NEW COMMENT
 	// 2
-	srand(time(0));
+	srand(time_t(0));
 	const int screen_width = 800;
 	const int screen_height = 800;
 	const int board_width = 20;
@@ -35,10 +38,9 @@ int main()
 	
 	ViewManager *manager = new ViewManager;
 
-	BombermanGame *bomberman = new BombermanGame(board_width, board_height);
+	BombermanGame *bomberman = new BombermanGame();
 	BombermanGameView bomberman_view(bomberman);
 
-	    //fsdfs
 	//printf("%d", bomberman);
 	
 	//Player bartek(bomberman, 1, 1);
