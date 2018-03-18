@@ -6,6 +6,17 @@
 #include <iostream>
 #include <SFML/System/Clock.hpp>
 #include "Crate.h"
+<<<<<<< HEAD
+=======
+#include <Windows.h>
+Player* BombermanGame::add_player(int x, int y)
+{
+	Player* new_player = new Player(this, x+1, y+1);
+	players.push_front(new_player);
+	this->board->set_object({x,y},new_player); //dodajemy obiekt gracza na pozycje x,y (BR)
+	return new_player;
+}
+>>>>>>> adding_new_board_objects
 
 //<<<<<<< HEAD
 
@@ -34,6 +45,7 @@ double BombermanGame::apply_friction_to_speed(const double & friction, double sp
 
 void BombermanGame::loop()
 {
+	
 	sf::Clock clock;
 	// game ticks per second
 	const double tickrate = 60;
@@ -58,6 +70,7 @@ void BombermanGame::loop()
 	while (true)
 	{
 		bool tick = false;
+		Sleep(milliseconds_between_ticks / 4);
 		/*
 		 * velocity = blocks per second
 		 */
