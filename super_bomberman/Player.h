@@ -3,6 +3,7 @@
 
 
 #include "BoardObject.h"
+#include <set>
 
 
 class Player : public BoardObject

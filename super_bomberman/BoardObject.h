@@ -30,6 +30,7 @@ public:
 	bool can_be_broken;
 	bool can_be_collided;
 	BombermanGame* bomberman_game;
+	sf::Texture *texture = new sf::Texture;
 
 // Constructors and destructors
 	BoardObject(BombermanGame* bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
@@ -48,7 +49,7 @@ public:
 	{
 		sf::Sprite* sprite = new sf::Sprite;
 		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
-		sf::Texture *texture = new sf::Texture;
+		
 
 		if (!texture->loadFromFile("question.png"))
 		{
@@ -66,8 +67,8 @@ public:
 		top,
 		right,
 		bottom,
-//<<<<<<< HEAD
-		left
+		left,
+		none
 	};
 
 	//*/
@@ -83,9 +84,10 @@ public:
 	{
 		if (can_be_collided)
 		{
+
+			
 			//coś
 /*<<<<<<< HEAD
-
 
 			// sprawdź górną kolizję
 			if (y >= board_y + 0.5 && y <= board_y + 1) return top;
@@ -116,6 +118,6 @@ public:
 		}
 
 	}
-
+	
 };
 #endif
