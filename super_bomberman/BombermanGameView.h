@@ -3,15 +3,12 @@
 
 #include "View.h"
 #include "SFML/Graphics.hpp"
-#include "Snake.h"
 #include "BombermanGame.h"
 #include "Player.h"
 #include "Board.h"
 
 class BombermanGameView : public View
 {
-
-
 // Public definitions
 
 // Private fields
@@ -54,35 +51,31 @@ public:
 		{
 			for (int y = 0; y < bomberman_game->board->get_map_size().second; y++)
 			{
-				if (bomberman_game->board->get_object({ x,y }) != nullptr)
+				BoardObject* board_object = bomberman_game->board->get_object({ x,y });
+				if (board_object != nullptr)
 				{
-					sf::Sprite *sprite = bomberman_game->board->get_object({x,y})->get_graphical_representation();
+					if (!board_object->requires_update)
+						continue;					
+
+					sf::Sprite *sprite = board_object->get_graphical_representation();
 					sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
 
 					//sf::CircleShape *sprite = new sf::CircleShape(grid_cell_side / 2);					
 					//sprite->setFillColor(sf::Color(40, 40, 200));
 
 					Player* player;
-					if (player = dynamic_cast<Player*>(bomberman_game->board->get_object({ x,y })))
+					if (player = dynamic_cast<Player*>(board_object))
 					{
-//<<<<<<< HEAD
-	//					circle->setPosition(start_x + grid_cell_side * float(player->exact_x), start_y + grid_cell_side * float(player->exact_y));
-//=======
 						sprite->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
-//>>>>>>> adding_new_board_objects*/
 					}
 					else
 					{
 						sprite->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
 					}
-/*<<<<<<< HEAD
-					drawables.push_back(circle);
-=======
-*/
-				
+	
 					drawables.push_back(sprite);
-//>>>>>>> adding_new_board_objects
-				}
+					board_object->requires_update = false;
+				}				
 			}
 		}
 	};

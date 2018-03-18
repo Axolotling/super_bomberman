@@ -7,6 +7,8 @@
 #include <SFML/System/Clock.hpp>
 #include "Crate.h"
 #include <Windows.h>
+
+/*
 Player* BombermanGame::add_player(int x, int y)
 {
 	Player* new_player = new Player(this, x+1, y+1);
@@ -14,20 +16,16 @@ Player* BombermanGame::add_player(int x, int y)
 	this->board->set_object({x,y},new_player); //dodajemy obiekt gracza na pozycje x,y (BR)
 	return new_player;
 }
+*/
 
 //<<<<<<< HEAD
 
 //BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
 //=======
 BombermanGame::BombermanGame()
-//>>>>>>> dcf9718d0f66ec0b7934243d2076119288088ee1
 {
-	this->board = new Board();
-	local_player = add_player(0, 0);
-
-	board->set_object({ 6,6 }, new Crate(this, 6, 6));
-
-	board->set_object({ 8,6 }, new Crate(this, 8, 6));
+	this->board = new Board(this,1);
+	this->local_player = this->players.front();
 }
 
 // note that friction and speed should be related to the same time period
@@ -68,11 +66,14 @@ void BombermanGame::loop()
 
 	double max_v_fields_per_second = 6;
 	double max_v_fields_per_tick = max_v_fields_per_second / tickrate;
+	double milliseconds = milliseconds_between_ticks / 4;
 
 	while (true)
 	{
 		bool tick = false;
-		Sleep(milliseconds_between_ticks / 4);
+
+		
+		//Sleep(milliseconds);
 		/*
 		 * velocity = blocks per second
 		 */
@@ -83,13 +84,11 @@ void BombermanGame::loop()
 			time_of_last_tick = time_of_last_tick + int(milliseconds_between_ticks);
 		}
 
-		
 
 		if (tick)
-		{
+		{			
 			if (local_player->board_x < board->get_map_size().first-1)
 			{
-				//local_player->move_player(1, 0);
 				bool pressed_up_or_down = false;
 				bool pressed_left_or_right = false;
 
@@ -133,5 +132,6 @@ void BombermanGame::loop()
 			}
 			local_player->move_player(local_player->x_velocity, local_player->y_velocity);			
 		}
+		
 	}
 }
