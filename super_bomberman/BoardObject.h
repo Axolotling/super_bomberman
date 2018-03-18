@@ -9,7 +9,7 @@
 #include <iostream>
 #include <set>
 
-#define epsilon 0.1
+#define epsilon 0.00001
 
 class BombermanGame;
 
@@ -38,18 +38,8 @@ public:
 	board_y(board_y),	
 	can_be_broken(can_be_broken),
 	can_be_collided(can_be_collided),
-	bomberman_game(bomberman_game)
-	{
-		
-		if (!texture->loadFromFile("question.png"))
-		{
-			std::cout << "Grafika obiektu się nie załadowała";
-		}
-
-	};
+	bomberman_game(bomberman_game) {};
 	
-
-
 	virtual ~BoardObject(){};
 
 // Private methods
@@ -61,7 +51,10 @@ public:
 		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
 		
 
-		
+		if (!texture->loadFromFile("question.png"))
+		{
+			std::cout << "Grafika obiektu się nie załadowała";
+		}
 		
 		sprite->setTexture(*texture);
 		sprite->setTextureRect(sf::IntRect(0, 0,texture->getSize().x,texture->getSize().y));
@@ -91,19 +84,23 @@ public:
 	{
 		if (can_be_collided)
 		{
-			std::set<collision> collisions;
 
-			if (x + w - epsilon > board_x && x + epsilon < board_x + 1 && y > board_y) collisions.insert(top);
-
-			if (y + h - epsilon > board_y && y + epsilon < board_y + 1 && x < board_x) collisions.insert(right);
-
-			if (x + w - epsilon > board_x && x + epsilon < board_x + 1 && y < board_y) collisions.insert(bottom);
-
-			if (y + h - epsilon > board_y && y + epsilon < board_y + 1 && x > board_x) collisions.insert(left);
 			
-			
-			
-			/*
+			//coś
+/*<<<<<<< HEAD
+
+			// sprawdź górną kolizję
+			if (y >= board_y + 0.5 && y <= board_y + 1) return top;
+			// sprawdź prawą kolizję
+			if (x + w >= board_x && x + w <= board_x + 0.5) return right;
+			// sprawdź dolną kolizję
+			if (y + h >= board_y && y + h <= board_y + 0.5) return bottom;
+			// sprawdź lewą kolizję
+			if (x >= board_x + 0.5 && x <= board_x + 1) return left;
+
+=======
+*/			std::set<collision> collisions;
+
 			// sprawdź górną kolizję
 			if (y >= board_y + 0.5 && y < board_y + 1) collisions.insert(top);
 			else
@@ -115,7 +112,8 @@ public:
 			// sprawdź lewą kolizję
 			else
 			if (x >= board_x + 0.5 && x - epsilon < board_x + 1) collisions.insert(left);
-			*/
+//>>>>>>> generating_map
+
 			return collisions;
 		}
 

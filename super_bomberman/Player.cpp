@@ -43,9 +43,8 @@ void Player::move_player(double x_difference, double y_difference)
 	}*/
 }
 
-Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& board_y) 
-: 
-BoardObject(bomberman_game, board_x, board_y, true, true)
+Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& board_y) : BoardObject(
+	bomberman_game, board_x, board_y, true, true)
 {
 	orientation = north;
 	x_velocity = 0;

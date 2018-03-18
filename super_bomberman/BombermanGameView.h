@@ -3,15 +3,12 @@
 
 #include "View.h"
 #include "SFML/Graphics.hpp"
-#include "Snake.h"
 #include "BombermanGame.h"
 #include "Player.h"
 #include "Board.h"
 
 class BombermanGameView : public View
 {
-
-
 // Public definitions
 
 // Private fields

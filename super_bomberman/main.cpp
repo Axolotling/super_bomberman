@@ -17,12 +17,6 @@ using namespace std;
 
 int main()
 {
-	//map<tuple<int, int>, BoardObject* > *a;
-	
-	//G(2) / G(3);
-
-	// NEW COMMENT
-	// 2
 	srand(time_t(0));
 	const int screen_width = 800;
 	const int screen_height = 800;
@@ -41,9 +35,8 @@ int main()
 	BombermanGame *bomberman = new BombermanGame();
 	BombermanGameView bomberman_view(bomberman);
 
-	//printf("%d", bomberman);
-	
-	//Player bartek(bomberman, 1, 1);
+	//sprawdzanie graczy
+	//for (auto it = bomberman->players.begin(); it != bomberman->players.end(); it++)std::cout << *it << endl;
 
 	manager->add_view(&bomberman_view, 0, 0, screen_width/board_width,screen_width, screen_height);
 	manager->update();

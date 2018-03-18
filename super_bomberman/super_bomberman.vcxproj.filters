@@ -15,12 +15,6 @@
     <ClInclude Include="MouseInterpreter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SnakeView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Steering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
