@@ -39,5 +39,5 @@ Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& boa
 
 void Player::check_collision_with(BoardObject * board_object)
 {
-
+	
 }

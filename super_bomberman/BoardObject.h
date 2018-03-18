@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <iostream>
+#include <set>
 
 
 class BombermanGame;
@@ -59,19 +60,31 @@ public:
 		return sprite;
 	}
 
-	void collider(double x, double y)
+	enum collision
+	{
+		top,
+		right,
+		bottom,
+		left
+	};
+
+
+	collision collider(double x, double y, double w, double h)
 	{
 		if (can_be_collided)
 		{
 			//coś
-			if (x + 1 >= board_x && x <= board_x + 1)
-			{
-				if (y + 1 >= board_y && y <= board_y + 1)
-				{
 
-				}
-			}
-			//finish it
+
+			// sprawdź górną kolizję
+			if (y >= board_y + 0.5 && y <= board_y + 1) return top;
+			// sprawdź prawą kolizję
+			if (x + w >= board_x && x + w <= board_x + 0.5) return right;
+			// sprawdź dolną kolizję
+			if (y + h >= board_y && y + h <= board_y + 0.5) return bottom;
+			// sprawdź lewą kolizję
+			if (x >= board_x + 0.5 && x <= board_x + 1) return left;
+
 
 		}
 
