@@ -16,17 +16,14 @@ public:
 	MouseInterpreter *mouse_interpreter;
 	int width;
 	int height;
-
-
+	
 	Window(int width, int height, ViewManager* view_manager) : view_manager(view_manager), width(width), height(height) {};
-
-
-
+	
 	void start()
 	{
 		sf::RenderWindow window(sf::VideoMode(width, height), "Bomberman");
 		mouse_interpreter = new MouseInterpreter(&window, view_manager);
-		window.setFramerateLimit(60);
+		window.setFramerateLimit(30);
 		bool was_left_button_pressed = false;
 		bool was_mousewheel_moved = false;
 		sf::Vector2i start_position;
@@ -40,55 +37,7 @@ public:
 			{
 				if (event.type == sf::Event::Closed)
 					window.close();
-			}
-
-		/*	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-				if (!is_this_first_click)
-				{					
-					start_position = sf::Mouse::getPosition();
-					is_this_first_click = true;
-				}
-				else
-				{
-					current_position = sf::Mouse::getPosition();
-				}
-				view_manager->view_manager_translation_x = saved_position.x + current_position.x - start_position.x;
-				view_manager->view_manager_translation_y = saved_position.y + current_position.y - start_position.y;
-				
-			
-			}
-			else
-			{
-				saved_position.x = view_manager->view_manager_translation_x;
-				saved_position.y = view_manager->view_manager_translation_y;
-				current_position = start_position = {0,0};
-				is_this_first_click = false;
-			}
-			
-			*/
-			
-		/*
-			if (event.type == sf::Event::MouseWheelScrolled && !was_mousewheel_moved)
-			{
-
-
-				was_mousewheel_moved = true;
-				if (event.mouseWheelScroll.delta > 0)
-				{				
-					view_manager->view_manager_scale *= 1.1;
-				}
-				else if (event.mouseWheelScroll.delta < 0)
-				{
-					view_manager->view_manager_scale *= 0.9;
-				}
-			}
-			else
-			{
-				was_mousewheel_moved = false;
-			}
-
-			*/
+			}		
 		
 			if (view_manager != nullptr)
 			{
@@ -109,6 +58,5 @@ public:
 	}
 	~Window(){};
 };
-	
 
 #endif

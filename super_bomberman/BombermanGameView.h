@@ -50,6 +50,7 @@ public:
 		for(auto it=bomberman_game->board->begin();it!=bomberman_game->board->end();it++)
 			if (it->second != nullptr)
 			{
+
 				sf::Sprite *sprite = it->second->get_graphical_representation();
 				sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
 				Player* player;
@@ -58,6 +59,7 @@ public:
 				else
 					sprite->setPosition(start_x + grid_cell_side * it->first.first, start_y + grid_cell_side * it->first.second);
 				drawables.push_back(sprite);
+
 			}
 	};
 
