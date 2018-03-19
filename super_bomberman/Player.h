@@ -3,6 +3,7 @@
 
 
 #include "BoardObject.h"
+#include <set>
 
 
 class Player : public BoardObject
@@ -29,6 +30,9 @@ public:
 
 // Private methods
 // Public methods
+	std::set<collision> check_collision_with(BoardObject* board_object);
+
+	std::set<collision> check_collisions();
 };
 
 

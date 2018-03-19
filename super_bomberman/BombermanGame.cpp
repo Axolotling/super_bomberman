@@ -2,29 +2,30 @@
 #include "Player.h"
 #include "Steering.h"
 #include "KeyboardSteering.h"
+#include "Board.h"
 #include <iostream>
 #include <SFML/System/Clock.hpp>
+#include "Crate.h"
+#include <Windows.h>
 
+/*
 Player* BombermanGame::add_player(int x, int y)
 {
-	Player* new_player = new Player(this, x, y);
+	Player* new_player = new Player(this, x+1, y+1);
 	players.push_front(new_player);
-	board[x][y] = new_player;
+	this->board->set_object({x,y},new_player); //dodajemy obiekt gracza na pozycje x,y (BR)
 	return new_player;
 }
+*/
 
-BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
+//<<<<<<< HEAD
+
+//BombermanGame::BombermanGame(const int& board_width, const int& board_height): board_width(board_width), board_height(board_height)
+//=======
+BombermanGame::BombermanGame()
 {
-	board = new BoardObject**[board_width];
-	for (int i = 0; i < board_width; i++)
-	{
-		board[i] = new BoardObject*[board_height];
-		for (int j = 0; j < board_height; j++)
-		{
-			board[i][j] = nullptr;
-		}
-	}
-	local_player = add_player(0, 0);
+	this->board = new Board(this,1);
+	this->local_player = this->players.front();
 }
 
 // note that friction and speed should be related to the same time period
@@ -44,6 +45,7 @@ double BombermanGame::apply_friction_to_speed(const double & friction, double sp
 
 void BombermanGame::loop()
 {
+	
 	sf::Clock clock;
 	// game ticks per second
 	const double tickrate = 60;
@@ -64,10 +66,14 @@ void BombermanGame::loop()
 
 	double max_v_fields_per_second = 6;
 	double max_v_fields_per_tick = max_v_fields_per_second / tickrate;
+	double milliseconds = milliseconds_between_ticks / 4;
 
 	while (true)
 	{
 		bool tick = false;
+
+		
+		//Sleep(milliseconds);
 		/*
 		 * velocity = blocks per second
 		 */
@@ -75,16 +81,14 @@ void BombermanGame::loop()
 		if (clock.getElapsedTime().asMilliseconds() >= time_of_last_tick + milliseconds_between_ticks)
 		{
 			tick = true;
-			time_of_last_tick = time_of_last_tick + milliseconds_between_ticks;
+			time_of_last_tick = time_of_last_tick + int(milliseconds_between_ticks);
 		}
 
-		
 
 		if (tick)
-		{
-			if (local_player->board_x < board_width - 1)
+		{			
+			if (local_player->board_x < board->get_map_size().first-1)
 			{
-				//local_player->move_player(1, 0);
 				bool pressed_up_or_down = false;
 				bool pressed_left_or_right = false;
 
@@ -128,5 +132,6 @@ void BombermanGame::loop()
 			}
 			local_player->move_player(local_player->x_velocity, local_player->y_velocity);			
 		}
+		
 	}
 }

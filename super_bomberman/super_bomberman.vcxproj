@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="BoardObject.h" />
     <ClInclude Include="BombermanGame.h" />
     <ClInclude Include="BombermanGameView.h" />
@@ -19,8 +20,6 @@
     <ClInclude Include="MouseInterpreter.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rock.h" />
-    <ClInclude Include="Snake.h" />
-    <ClInclude Include="SnakeView.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="ViewManager.h" />
@@ -28,8 +27,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BombermanGame.cpp" />
+    <ClCompile Include="Crate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rock.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
