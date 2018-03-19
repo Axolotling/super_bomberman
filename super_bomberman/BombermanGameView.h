@@ -54,7 +54,7 @@ public:
 				sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
 				Player* player;
 				if (player = dynamic_cast<Player*>(it->second))
-					sprite->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
+					sprite->setPosition(start_x + grid_cell_side * float(player->exact_x), start_y + grid_cell_side * float(player->exact_y));
 				else
 					sprite->setPosition(start_x + grid_cell_side * it->first.first, start_y + grid_cell_side * it->first.second);
 				drawables.push_back(sprite);

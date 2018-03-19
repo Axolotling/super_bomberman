@@ -63,9 +63,9 @@ std::set<BoardObject::collision> Player::check_collisions()
 
 	
 	std::set<collision> set_of_collisions;
-	for (int x = exact_x; x < exact_x+1; x++)
+	for (int x = int(exact_x); x < int(exact_x+1); x++)
 	{
-		for (int y = exact_y; y < exact_y+1; y++)
+		for (int y = int(exact_y); y < int(exact_y+1); y++)
 		{
 			BoardObject *object = bomberman_game->board->get_object({ x,y });
 			if (object != nullptr)

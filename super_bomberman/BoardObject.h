@@ -50,8 +50,8 @@ public:
 		sf::Sprite* sprite = new sf::Sprite;
 		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
 		
-
-		if (!texture->loadFromFile("question.png"))
+		
+		if (!texture->loadFromFile("brick.png"))
 		{
 			std::cout << "Grafika obiektu się nie załadowała";
 		}
@@ -116,8 +116,6 @@ public:
 
 			return collisions;
 		}
-
 	}
-	
 };
 #endif
