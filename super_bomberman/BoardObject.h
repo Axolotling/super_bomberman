@@ -26,7 +26,7 @@ class BoardObject : public Displayable
 protected:
 	
 // Public fields
-public:
+public:	
 	sf::Drawable *drawable;
 	// Gdzie na planszy znajduje się obiekt
 	int board_x, board_y;

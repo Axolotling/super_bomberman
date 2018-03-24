@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "Crate.h"
 #include "BombermanGame.h"
+#include "Board.h"
 
 using namespace std;
 
@@ -56,10 +57,15 @@ public:
 		auto a = new sf::RectangleShape(sf::Vector2f(200, 200));
 		a->setPosition(100, 100);
 		
+		Scene *scene2 = new Scene;
+
 		Crate *crate = new Crate(new BombermanGame(),2,2);
 
-		scene->add(crate);
+		auto board = new Board(new BombermanGame(), 1);
+		//this->local_player = this->players.front();
 
+		scene2->add(crate);
+		scene->add(board);
 		while (window.isOpen())
 		{
 			mouse_interpreter->handle_mouse();
@@ -83,16 +89,17 @@ public:
 				}
 			}
 			*/
-			//test
-			sf::Time current_time = clock.getElapsedTime();			
-			sf::Text text(std::to_string(current_time.asMilliseconds()),font);
-			window.draw(text);
-			//test_end
 
+			
 			
 			scene->update();
 			scene->display(&window);
-
+			//test
+			sf::Time current_time = clock.getElapsedTime();			
+			sf::Text text(std::to_string(current_time.asMilliseconds()), font);			
+			text.setFillColor(sf::Color::Red);
+			window.draw(text);
+			//test_end
 			
 
 			window.display();

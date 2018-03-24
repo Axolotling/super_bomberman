@@ -8,7 +8,16 @@ BoardObject::BoardObject(BombermanGame* bomberman_game, const int& board_x, cons
 	can_be_collided(can_be_collided),
 	bomberman_game(bomberman_game)
 {
+	if (!texture->loadFromFile("question.png"))
+	{
+		std::cout << "Grafika obiektu siê nie za³adowa³a";
+	}
 	requires_update = true;
+	drawable = new sf::Sprite;
+
+	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
+	sprite->setTexture(*texture);
+
 }
 
 BoardObject::~BoardObject()
@@ -32,18 +41,14 @@ sf::Sprite* BoardObject::get_graphical_representation()
 
 void BoardObject::update()
 {
-	sf::Sprite* sprite = new sf::Sprite;
-
-	if (!texture->loadFromFile("question.png"))
-	{
-		std::cout << "Grafika obiektu siê nie za³adowa³a";
-	}
+	
 
 
-	sprite->setTexture(*texture);
+	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
+
 	sprite->setTextureRect(sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y));
-	//sprite->setPosition(20, 20);
-	//sprite->setScale(200,200);
+	sprite->setPosition(board_x * 27, board_y * 27);
+	sprite->setScale(0.1,0.1);
 	drawable = sprite;
 }
 

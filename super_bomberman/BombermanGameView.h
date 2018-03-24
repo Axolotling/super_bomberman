@@ -73,6 +73,18 @@ public:
 						sprite->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
 					}
 	
+
+
+
+
+
+					
+
+
+
+
+
+
 					drawables.push_back(sprite);
 					board_object->requires_update = false;
 				}				
