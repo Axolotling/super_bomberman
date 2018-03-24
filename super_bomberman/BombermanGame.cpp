@@ -46,7 +46,7 @@ double BombermanGame::apply_friction_to_speed(const double & friction, double sp
 void BombermanGame::loop()
 {
 	
-	sf::Clock clock;
+	sf::Clock clock;	
 	// game ticks per second
 	const double tickrate = 60;
 
@@ -66,17 +66,12 @@ void BombermanGame::loop()
 
 	double max_v_fields_per_second = 6;
 	double max_v_fields_per_tick = max_v_fields_per_second / tickrate;
-	double milliseconds = milliseconds_between_ticks / 4;
+	//double milliseconds = milliseconds_between_ticks / 4;
 
 	while (true)
 	{
 		bool tick = false;
-
 		
-		//Sleep(milliseconds);
-		/*
-		 * velocity = blocks per second
-		 */
 
 		if (clock.getElapsedTime().asMilliseconds() >= time_of_last_tick + milliseconds_between_ticks)
 		{

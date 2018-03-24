@@ -8,13 +8,15 @@
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <iostream>
 #include <set>
+#include "Displayable.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #define epsilon 0.1
 
 class BombermanGame;
 
 // Klasa abstrakcyjna, która opisuje obiekt który może zostać umieszczony na planszy gry
-class BoardObject
+class BoardObject : public Displayable
 {
 // Public definitions
 	///none
@@ -25,6 +27,7 @@ protected:
 	
 // Public fields
 public:
+	sf::Drawable *drawable;
 	// Gdzie na planszy znajduje się obiekt
 	int board_x, board_y;
 	bool can_be_broken;
@@ -34,35 +37,19 @@ public:
 	sf::Texture *texture = new sf::Texture;
 
 // Constructors and destructors
-	BoardObject(BombermanGame* bomberman_game, const int &board_x, const int &board_y, bool can_be_broken = true, bool can_be_collided = true) :
-	board_x(board_x), 
-	board_y(board_y),	
-	can_be_broken(can_be_broken),
-	can_be_collided(can_be_collided),
-	bomberman_game(bomberman_game)
-	{
-		requires_update = true;
-	};
-	
-	virtual ~BoardObject(){};
+	BoardObject(BombermanGame* bomberman_game, const int& board_x, const int& board_y, bool can_be_broken = true,
+	            bool can_be_collided = true);;
+
+	virtual ~BoardObject();;
 
 // Private methods
 	///none
 // Public methods
-	virtual sf::Sprite* get_graphical_representation()
-	{
-		sf::Sprite* sprite = new sf::Sprite;	
+	virtual sf::Sprite* get_graphical_representation();
 
-		if (!texture->loadFromFile("question.png"))
-		{
-			std::cout << "Grafika obiektu się nie załadowała";
-		}
-		
-		sprite->setTexture(*texture);
-		sprite->setTextureRect(sf::IntRect(0, 0,texture->getSize().x,texture->getSize().y));
+	void update() override;
 
-		return sprite;
-	}
+	void display(sf::RenderWindow* window) override;
 
 	enum collision
 	{
@@ -73,23 +60,8 @@ public:
 		none
 	};
 
-	std::set<collision> collider(double x, double y, double w, double h)
-	{
-		if (can_be_collided)
-		{
-		std::set<collision> collisions;
-
-			if (x + w - epsilon > board_x && x + epsilon < board_x + 1)
-				if (y > board_y) collisions.insert(top);
-				else collisions.insert(bottom);			
-
-			if (y + h - epsilon > board_y && y + epsilon < board_y + 1) 
-				if(x < board_x) collisions.insert(right);
-				else collisions.insert(left);			
-
-			return collisions;
-		}
-	}	
-
+	std::set<collision> collider(double x, double y, double w, double h);
 };
+
+
 #endif

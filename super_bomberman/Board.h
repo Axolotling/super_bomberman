@@ -10,7 +10,7 @@ using namespace std;
 
 class BoardObject;
 
-class Board
+class Board// : public Displayable
 {
 public:
 	//losowo generowana mapa(podac liczbe graczy)
