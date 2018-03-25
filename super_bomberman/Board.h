@@ -93,6 +93,8 @@ public:
 					displayable->display(window);
 				}
 			}
+
+		
 	};
 
 private:
