@@ -7,6 +7,7 @@
 #include"Crate.h"
 #include"Player.h"
 #include<time.h>
+#include <list>
 using namespace std;
 
 class BoardObject;
@@ -15,9 +16,9 @@ class Board : public Displayable
 {
 public:
 	//losowo generowana mapa(podac liczbe graczy)
-	Board(BombermanGame* bomberman_game, int n_players)
+	Board(int n_players)
 	{
-		this->bomberman_game = bomberman_game;
+		///this->bomberman_game = bomberman_game;
 		this->board_width = 30; //aktualnie tylko stosunek 3:2 ma sens, inne nie dzia³aja poprawnie
 		this->board_height = 20;
 		generating_map();
@@ -71,20 +72,34 @@ public:
 		board.clear();
 	}
 
-	void update() override
+	void update(sf::Time delta_time) override
 	{
+		for (Player *player : players)
+		{
+			if (Displayable *displayable = dynamic_cast<Displayable*>(player))
+			{
+				displayable->update(delta_time);
+			}
+		}
 		for (auto it = begin(); it != end(); it++)
 			if (it->second != nullptr)
 			{
 				if (Displayable *displayable = dynamic_cast<Displayable*>(it->second))
 				{
-					displayable->update();
+					displayable->update(delta_time);
 				}
 			}
 	};
 
 	void display(sf::RenderWindow* window) override
 	{
+		for (Player *player: players)
+		{
+			if (Displayable *displayable = dynamic_cast<Displayable*>(player))
+			{
+				displayable->display(window);
+			}
+		}
 		for (auto it = begin(); it != end(); it++)
 			if (it->second != nullptr)
 			{
@@ -94,20 +109,21 @@ public:
 				}
 			}
 
-		
+
 	};
 
 private:
 	map<pair<int, int>, BoardObject*>board;
 	map<pair<int, int>, BoardObject*>::iterator it;
-	BombermanGame* bomberman_game;
+	//BombermanGame* bomberman_game;
 	int board_width;
 	int board_height;
+	list<Player*> players;
 
 	//generowanie mapy
 	void generating_map()
 	{
-		srand(time_t(0));
+		//srand(time_t(0));
 
 		//alokacja pamieci pomocniczej
 		bool **tab = new bool*[this->board_height];
@@ -155,7 +171,7 @@ private:
 				if (!tab[i][j])
 				{
 					ballast++; //obciazenie planszy
-					set_object({ j,i }, new Rock(bomberman_game, j, i));
+					set_object({ j,i }, new Rock(this, j, i));
 				}
 
 		//wykluczenie pol pod graczami i zapewnienie im poprawnego ruchu
@@ -165,18 +181,22 @@ private:
 		tab[1][this->board_width - 2] = tab[2][this->board_width - 2] = tab[1][this->board_width - 3] = 0;
 		tab[this->board_height - 2][1] = tab[this->board_height - 3][1] = tab[this->board_height - 2][2] = 0;
 
+		cout << "Skrzynki tu beda dodawane" << endl;
+
 		//dodanie tylu skrzynek aby zapelnienie calej planszy wynosilo okreslony % calosci mapy
-		while (ballast / double(this->board_height*this->board_width) < 0.1)
+		while (ballast / double(this->board_height*this->board_width) < 0.7)
 		{
 			int x = rand() % this->board_width;
 			int y = rand() % this->board_height;
 			if (tab[y][x])
 			{
-				set_object({ x,y }, new Crate(bomberman_game, x, y));
+				set_object({ x,y }, new Crate(this, x, y));
 				tab[y][x] = 0;
 				ballast++;
 			}
 		}
+
+		cout << "Skrzynki tu byly dodawane" << endl;
 
 		//dealokacja pamieci pomocniczej
 		for (int i = 0; i < this->board_height; i++)delete[] tab[i];
@@ -186,9 +206,9 @@ private:
 	//dodanie gracza
 	void add_player(int x, int y)
 	{
-		Player* new_player = new Player(bomberman_game, x, y);
-		bomberman_game->players.push_front(new_player);
-		set_object({ x,y }, new_player);
+		Player* new_player = new Player(this, x, y);
+		players.push_front(new_player);
+		//set_object({ x,y }, new_player);
 	}
 };
 #endif
