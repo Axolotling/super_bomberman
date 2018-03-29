@@ -51,9 +51,13 @@ public:
 // Public methods
 	virtual sf::Sprite* get_graphical_representation()
 	{
-		sf::Sprite* sprite = new sf::Sprite;	
 
-		if (!texture->loadFromFile("question.png"))
+		sf::Sprite* sprite = new sf::Sprite;
+		//sprite->setTextureRect(sf::IntRect(1, 1, 1, 1));
+		
+		
+		if (!texture->loadFromFile("brick.png"))
+
 		{
 			std::cout << "Grafika obiektu się nie załadowała";
 		}
@@ -89,7 +93,8 @@ public:
 
 			return collisions;
 		}
-	}	
+
+	}
 
 };
 #endif

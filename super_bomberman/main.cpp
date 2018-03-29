@@ -20,10 +20,6 @@ int main()
 	srand(time_t(0));
 	const int screen_width = 800;
 	const int screen_height = 800;
-	const int board_width = 20;
-	const int board_height = 20;
-	
-	
 	//Snake* snake = new Snake(board_width,board_height,1, 1, 4);
 	//KeyboardSteering *steering = new KeyboardSteering();
 	//snake->set_steering(steering);
@@ -38,7 +34,7 @@ int main()
 	//sprawdzanie graczy
 	//for (auto it = bomberman->players.begin(); it != bomberman->players.end(); it++)std::cout << *it << endl;
 
-	manager->add_view(&bomberman_view, 0, 0, screen_width/board_width,screen_width, screen_height);
+	manager->add_view(&bomberman_view, 0, 0, screen_width/bomberman->board->get_map_size().first,screen_width, screen_height);
 	manager->update();
 
 	thread thread_window(&Window::start, Window(screen_width, screen_height, manager));

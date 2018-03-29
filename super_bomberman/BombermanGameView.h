@@ -47,39 +47,21 @@ public:
 
 	void display_every_object_on_board(float start_x, float start_y, float grid_cell_side)
 	{
-		for (int x = 0; x < bomberman_game->board->get_map_size().first; x++)
-		{
-			for (int y = 0; y < bomberman_game->board->get_map_size().second; y++)
+		for(auto it=bomberman_game->board->begin();it!=bomberman_game->board->end();it++)
+			if (it->second != nullptr)
 			{
-				BoardObject* board_object = bomberman_game->board->get_object({ x,y });
-				if (board_object != nullptr)
-				{
-					if (!board_object->requires_update)
-						continue;					
 
-					sf::Sprite *sprite = board_object->get_graphical_representation();
-					sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
+				sf::Sprite *sprite = it->second->get_graphical_representation();
+				sprite->setScale(grid_cell_side / sprite->getTextureRect().width, grid_cell_side / sprite->getTextureRect().height);
+				Player* player;
+				if (player = dynamic_cast<Player*>(it->second))
+					sprite->setPosition(start_x + grid_cell_side * float(player->exact_x), start_y + grid_cell_side * float(player->exact_y));
+				else
+					sprite->setPosition(start_x + grid_cell_side * it->first.first, start_y + grid_cell_side * it->first.second);
+				drawables.push_back(sprite);
 
-					//sf::CircleShape *sprite = new sf::CircleShape(grid_cell_side / 2);					
-					//sprite->setFillColor(sf::Color(40, 40, 200));
-
-					Player* player;
-					if (player = dynamic_cast<Player*>(board_object))
-					{
-						sprite->setPosition(start_x + grid_cell_side * player->exact_x, start_y + grid_cell_side * player->exact_y);
-					}
-					else
-					{
-						sprite->setPosition(start_x + grid_cell_side * x, start_y + grid_cell_side * y);
-					}
-	
-					drawables.push_back(sprite);
-					board_object->requires_update = false;
-				}				
 			}
-		}
 	};
-
 
 // Public methods
 public:	
