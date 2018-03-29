@@ -2,9 +2,9 @@
 
 #include "Displayable.h"
 #include <set>
-#include "Board.h"
+#include <iostream>
 
-
+class Board;
 
 #define epsilon 0.1
 // Klasa abstrakcyjna, która opisuje obiekt który mo¿e zostaæ umieszczony na planszy gry
@@ -41,10 +41,9 @@ public:
 		top,
 		right,
 		bottom,
-		left,
 		none
 	};
-
+	/*
 	std::set<BoardObject::collision> BoardObject::collider(double x, double y, double w, double h)
 	{
 		if (can_be_collided)
@@ -57,11 +56,12 @@ public:
 
 				if (y + h - epsilon > board_y && y + epsilon < board_y + 1)
 					if (x < board_x) collisions.insert(right);
-					else collisions.insert(left);
+					else collisions.insert(collision::);
 
 					return collisions;
 		}
 	}
+	*/
 };
 
 
