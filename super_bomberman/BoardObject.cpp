@@ -8,7 +8,7 @@ BoardObject::BoardObject(Board* board, const int& board_x, const int& board_y, b
 	this->board_y = board_y;
 	this->can_be_broken = can_be_broken;
 	this->can_be_collided = can_be_collided;
-
+	this->board = board;
 
 	if (!texture->loadFromFile("question.png"))
 	{

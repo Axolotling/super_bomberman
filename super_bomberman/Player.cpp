@@ -1,12 +1,10 @@
 #include "Player.h"
 #include "Board.h"
-
-Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(
-	board, board_x, board_y, true, true)
+#define epsilon 0.1
+Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(board, board_x, board_y, true, true)
 {
 	exact_x = board_x;
 	exact_y = board_y;
-	this->board = board;
 	//std::cout << "Created Player Object" << std::endl;
 	if (!texture->loadFromFile("player.png"))
 	{
@@ -31,7 +29,6 @@ void Player::make_speed_smaller_or_equal_max()
 			double S = max_speed / speed;
 			speed_x = speed_x * S;
 			speed_y = speed_y * S;
-			std::cout << "SX=" << speed_x << " SY=" << speed_y << std::endl;
 		}
 	}
 	else
@@ -81,25 +78,43 @@ void Player::apply_friction_to_speed(const sf::Time& delta_time)
 	}
 }
 
-//tu powstaje error przy get object
+bool Player::is_object_on_field(int checked_x, int checked_y)
+{
+	BoardObject* checked_field = board->get_object({ checked_x, checked_y });
+	if (checked_field != nullptr && checked_field->can_be_collided)
+	{
+		return true;
+	}
+	return false;
+}
+
+
 bool Player::is_there_collision_on_the_right()
 {
-	int checked_x = exact_x + 1.0;
-	int checked_y = exact_y;
-	BoardObject* checked_field = board->get_object({checked_x, checked_y});
-	if (checked_field != nullptr && checked_field->can_be_collided)
-	{
-		return true;
-	}
+	if (is_object_on_field(exact_x + 1.0, exact_y + epsilon)) return true;
+	if (is_object_on_field(exact_x + 1.0, exact_y + 1.0 - epsilon)) return true;
+	return false;
+}
 
-	checked_y = exact_y + 1;
-	checked_field = board->get_object({checked_x, checked_y});
-	if (checked_field != nullptr && checked_field->can_be_collided)
-	{
-		return true;
-	}
 
-	//fa³sz gdy nie znaleziono kolizji z prawej
+bool Player::is_there_collision_on_the_left()
+{
+	if (is_object_on_field(exact_x, exact_y + epsilon)) return true;
+	if (is_object_on_field(exact_x, exact_y + 1.0 - epsilon)) return true;
+	return false;
+}
+
+bool Player::is_there_collision_on_the_top()
+{
+	if (is_object_on_field(exact_x + epsilon, exact_y)) return true;
+	if (is_object_on_field(exact_x + 1.0 - epsilon, exact_y)) return true;
+	return false;
+}
+
+bool Player::is_there_collision_on_the_bottom()
+{
+	if (is_object_on_field(exact_x + epsilon, exact_y + 1.0)) return true;
+	if (is_object_on_field(exact_x + 1.0 - epsilon, exact_y + 1.0)) return true;
 	return false;
 }
 
@@ -129,12 +144,41 @@ void Player::update(sf::Time delta_time)
 	apply_friction_to_speed(delta_time);
 	make_speed_smaller_or_equal_max();
 
-	double new_x = exact_x + speed_x * delta_time.asSeconds();
-	double new_y = exact_y + speed_y * delta_time.asSeconds();
+	exact_x = exact_x + speed_x * delta_time.asSeconds();
+	exact_y = exact_y + speed_y * delta_time.asSeconds();
+	if (speed_x > 0)
+	{
+		if (is_there_collision_on_the_right())
+		{
+			exact_x = static_cast<int>(exact_x);
+			speed_x = 0;
+		}
+	}
+	else
+	{
+		if (is_there_collision_on_the_left()) 
+		{
+			exact_x = static_cast<int>(exact_x + 1.0);
+			speed_x = 0;
+		}
+	}
 
-	exact_x = new_x;
-	exact_y = new_y;
-	if (is_there_collision_on_the_right()) exact_x = static_cast<int>(exact_x);
+	if (speed_y > 0)
+	{
+		if (is_there_collision_on_the_bottom())
+		{
+			exact_y = static_cast<int>(exact_y);
+			speed_y = 0;
+		}
+	}
+	else
+	{
+		if (is_there_collision_on_the_top()) {
+			exact_y = static_cast<int>(exact_y + 1.0);
+			speed_y = 0;
+		}
+	}
+	
 
 	BoardObject::update(delta_time);
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
