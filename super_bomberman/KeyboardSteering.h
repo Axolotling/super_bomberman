@@ -3,6 +3,7 @@
 
 #include "Steering.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <list>
 
 class KeyboardSteering : public Steering
 {

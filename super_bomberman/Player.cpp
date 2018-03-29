@@ -1,90 +1,142 @@
 #include "Player.h"
-#include "BombermanGame.h"
 #include "Board.h"
 
-
-
-void Player::move_player(double x_difference, double y_difference)
+Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(
+	board, board_x, board_y, true, true)
 {
-	requires_update = true;
-
-	int remembered_board_x = board_x, remembered_board_y = board_y;
-	int board_width = bomberman_game->board->get_map_size().first;
-	int board_height = bomberman_game->board->get_map_size().second;
-	//bomberman_game->board[board_x][board_y] = nullptr;
-	
-
-	auto a = check_collisions();
-
-	exact_x += x_difference;
-	exact_y += y_difference;
-
-	if (a.find(right) != a.end() && x_difference > 0) exact_x -= x_difference;
-	else if (a.find(left) != a.end() && x_difference < 0) exact_x -= x_difference;
-	
-	if (a.find(bottom) != a.end() && y_difference > 0) exact_y -= y_difference;
-	else if (a.find(top) != a.end() && y_difference < 0) exact_y -= y_difference;
-
-
-	
-
-
-	if (exact_x > board_width - 1) exact_x = board_width - 1.000000001;
-	if (exact_x < 0) exact_x = 0;
-	if (exact_y < 0) exact_y = 0;
-	if (exact_y > board_height - 1) exact_y = board_height - 1;
-
-
-	/*if (static_cast<int>(exact_x) != remembered_board_x || static_cast<int>(exact_y) != remembered_board_y)
-	{
-		bomberman_game->board->set_object({remembered_board_x,remembered_board_y},nullptr);
-		board_x = static_cast<int>(exact_x);
-		board_y = static_cast<int>(exact_y);
-		bomberman_game->board->set_object({board_x,board_y},this);
-	}*/
-}
-
-Player::Player(BombermanGame* bomberman_game, const int& board_x, const int& board_y) : BoardObject(
-	bomberman_game, board_x, board_y, true, true)
-{
-	
-	orientation = north;
-	x_velocity = 0;
-	y_velocity = 0;
 	exact_x = board_x;
 	exact_y = board_y;
+	this->board = board;
+	//std::cout << "Created Player Object" << std::endl;
+	if (!texture->loadFromFile("player.png"))
+	{
+		std::cout << "Grafika obiektu siê nie za³adowa³a";
+	}
+	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
+	sprite->setTexture(*texture);
 }
 
+Player::~Player()
+{
+}
 
-
-std::set<BoardObject::collision> Player::check_collisions()
-{	
-	std::set<collision> set_of_collisions;
-	for (int x = int(exact_x); x < int(exact_x+1); x++)
+void Player::make_speed_smaller_or_equal_max()
+{
+	if (speed_x * speed_y != 0)
 	{
-		for (int y = int(exact_y); y < int(exact_y+1); y++)
+		double speed = sqrt(speed_x * speed_x + speed_y * speed_y);
+
+		if (speed > max_speed)
 		{
-			BoardObject *object = bomberman_game->board->get_object({ x,y });
-			if (object != nullptr)
-			{
-				auto collisions = check_collision_with(object);
-				set_of_collisions.insert(collisions.begin(), collisions.end());
-			}
-			
+			double S = max_speed / speed;
+			speed_x = speed_x * S;
+			speed_y = speed_y * S;
+			std::cout << "SX=" << speed_x << " SY=" << speed_y << std::endl;
 		}
 	}
-
-	//set_of_collisions.find(BoardObject::top);
-
-
-
-	return set_of_collisions;
-//>>>>>>> generating_map
+	else
+	{
+		if (speed_x > max_speed)
+		{
+			speed_x = max_speed;
+		}
+		else if (speed_y > max_speed)
+		{
+			speed_y = max_speed;
+		}
+		else if (speed_y < -max_speed)
+		{
+			speed_y = -max_speed;
+		}
+		else if (speed_x < -max_speed)
+		{
+			speed_x = -max_speed;
+		}
+	}
 }
 
-
-
-std::set<BoardObject::collision> Player::check_collision_with(BoardObject* board_object)
+void Player::apply_friction_to_speed(const sf::Time& delta_time)
 {
-	return board_object->collider(exact_x, exact_y, 1, 1);
+	if (speed_x > 0)
+	{
+		speed_x -= friction * delta_time.asSeconds();
+		if (speed_x < 0) speed_x = 0;
+	}
+	else
+	{
+		speed_x += friction * delta_time.asSeconds();
+		if (speed_x > 0) speed_x = 0;
+	}
+
+
+	if (speed_y > 0)
+	{
+		speed_y -= friction * delta_time.asSeconds();
+		if (speed_y < 0) speed_y = 0;
+	}
+	else
+	{
+		speed_y += friction * delta_time.asSeconds();
+		if (speed_y > 0) speed_y = 0;
+	}
+}
+
+//tu powstaje error przy get object
+bool Player::is_there_collision_on_the_right()
+{
+	int checked_x = exact_x + 1.0;
+	int checked_y = exact_y;
+	BoardObject* checked_field = board->get_object({checked_x, checked_y});
+	if (checked_field != nullptr && checked_field->can_be_collided)
+	{
+		return true;
+	}
+
+	checked_y = exact_y + 1;
+	checked_field = board->get_object({checked_x, checked_y});
+	if (checked_field != nullptr && checked_field->can_be_collided)
+	{
+		return true;
+	}
+
+	//fa³sz gdy nie znaleziono kolizji z prawej
+	return false;
+}
+
+void Player::update(sf::Time delta_time)
+{
+	for (Steering::Action action : steering.determine_action())
+	{
+		switch (action)
+		{
+		case Steering::GO_RIGHT:
+			//exact_x += speed_x * delta_time.asSeconds();
+			speed_x += acceleration * delta_time.asSeconds();
+			break;
+		case Steering::GO_LEFT:
+			//exact_x -= speed_x * delta_time.asSeconds();
+			speed_x -= acceleration * delta_time.asSeconds();
+			break;
+		case Steering::GO_UP:
+			speed_y -= acceleration * delta_time.asSeconds(); //exact_y -= speed_y * delta_time.asSeconds();
+			break;
+		case Steering::GO_DOWN:
+			speed_y += acceleration * delta_time.asSeconds();
+			//exact_y += speed_y * delta_time.asSeconds();
+			break;
+		}
+	}
+	apply_friction_to_speed(delta_time);
+	make_speed_smaller_or_equal_max();
+
+	double new_x = exact_x + speed_x * delta_time.asSeconds();
+	double new_y = exact_y + speed_y * delta_time.asSeconds();
+
+	exact_x = new_x;
+	exact_y = new_y;
+	if (is_there_collision_on_the_right()) exact_x = static_cast<int>(exact_x);
+
+	BoardObject::update(delta_time);
+	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
+	sprite->setPosition(grid_cell_side * exact_x, grid_cell_side * exact_y);
 }
