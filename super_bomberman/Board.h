@@ -8,7 +8,7 @@
 #include"Player.h"
 using namespace std;
 
-class BoardObject;
+class BoardObject; 
 
 class Board
 {
