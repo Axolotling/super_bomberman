@@ -27,6 +27,11 @@ public:
 		{
 			actions.push_front(GO_DOWN);
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		{
+			actions.push_front(BOMB);
+		}
+
 
 		if (actions.empty())
 		{

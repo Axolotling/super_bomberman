@@ -25,6 +25,8 @@ public:
 
 		Scene *scene = new Scene;
 		Board* board = new Board(1);
+	//	board->key_erase({ 3, 0 });
+	//	board->key_erase({ 3, 0 });
 
 		scene->add(board);
 		while (window->isOpen())

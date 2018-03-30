@@ -9,6 +9,7 @@
 #include"Player.h"
 #include<time.h>
 #include <list>
+#include <queue>
 using namespace std;
 
 class BoardObject;
@@ -64,6 +65,31 @@ public:
 	{
 		board[position] = object;
 	}
+//usuwa element mapy korzystajac z klucza(pozycji)
+	void key_erase(pair<int, int> position)
+		{
+		it = board.find(position);
+		if (it != board.end())
+			{
+			board[position]->~BoardObject();
+			board.erase(it);
+			}
+		//cout<<"elementu nie znaleziono\n";
+		}
+ 
+	//usuwa element mapy korzystaj¹c z wartoœci(adresu obiektu)
+	void value_erase(BoardObject* object)
+		{
+		for(it=board.begin();it!=board.end();it++)
+			if (it->second == object)
+				{
+				board[it->first]->~BoardObject();
+				board.erase(it);
+				return;
+				}
+		//cout<<"elementu nie znaleziono\n";
+		}
+
 
 	//virtualny destruktor
 	virtual ~Board()
@@ -90,17 +116,11 @@ public:
 					displayable->update(delta_time);
 				}
 			}
+		delete_sheduled_objects();
 	};
 
 	void display(sf::RenderWindow* window) override
-	{
-		for (Player *player: players)
-		{
-			if (Displayable *displayable = dynamic_cast<Displayable*>(player))
-			{
-				displayable->display(window);
-			}
-		}
+	{		
 		for (auto it = begin(); it != end(); it++)
 			if (it->second != nullptr)
 			{
@@ -110,8 +130,19 @@ public:
 				}
 			}
 
-
+		for (Player *player : players)
+		{
+			if (Displayable *displayable = dynamic_cast<Displayable*>(player))
+			{
+				displayable->display(window);
+			}
+		}
 	};
+
+	void shedule_for_deletion(BoardObject* board_object)
+	{
+		sheduled_for_deletion.push(board_object);
+	}
 
 private:
 	map<pair<int, int>, BoardObject*>board;
@@ -120,6 +151,16 @@ private:
 	int board_width;
 	int board_height;
 	list<Player*> players;
+	queue<BoardObject*> sheduled_for_deletion;
+
+	void delete_sheduled_objects()
+	{
+		while (sheduled_for_deletion.size() != 0)
+		{
+			value_erase(sheduled_for_deletion.front());
+			sheduled_for_deletion.pop();
+		}
+	}
 
 	//generowanie mapy
 	void generating_map()

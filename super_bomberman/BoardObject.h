@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Displayable.h"
-#include <set>
 #include <iostream>
 
 class Board;

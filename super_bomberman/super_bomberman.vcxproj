@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoardObject.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Crate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -20,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardObject.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bomberman.h" />
     <ClInclude Include="Crate.h" />
     <ClInclude Include="Displayable.h" />

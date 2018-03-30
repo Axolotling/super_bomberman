@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Board.h"
+#include "Bomb.h"
 #define epsilon 0.1
+
 Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(board, board_x, board_y, true, true)
 {
 	exact_x = board_x;
@@ -138,6 +140,17 @@ void Player::update(sf::Time delta_time)
 		case Steering::GO_DOWN:
 			speed_y += acceleration * delta_time.asSeconds();
 			//exact_y += speed_y * delta_time.asSeconds();
+			break;
+		case Steering::BOMB:
+			int bomb_x = exact_x + 0.5;
+			int bomb_y = exact_y + 0.5;
+			BoardObject *board_object = board->get_object({ bomb_x, bomb_y });
+			if (board_object == nullptr);
+			{
+				assert(board_object == nullptr);
+				board->set_object({ bomb_x, bomb_y }, new Bomb(board, bomb_x, bomb_y));
+				assert(board->get_object({ bomb_x, bomb_y }) != nullptr);
+			}			
 			break;
 		}
 	}
