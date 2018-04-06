@@ -15,6 +15,8 @@ public:
 		}
 		sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 		sprite->setTexture(*texture);
+		
+		
 
 	};
 	~Rock() {};

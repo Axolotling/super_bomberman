@@ -24,7 +24,7 @@ public:
 		sf::Time last_update_time = clock.getElapsedTime();
 
 		Scene *scene = new Scene;
-		Board* board = new Board(1);
+		Board* board = new Board(2);
 	//	board->key_erase({ 3, 0 });
 	//	board->key_erase({ 3, 0 });
 

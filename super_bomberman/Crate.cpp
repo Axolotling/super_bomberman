@@ -18,10 +18,4 @@ void Crate::update(sf::Time delta_time)
 {
 	BoardObject::update(delta_time);
 	total_time += delta_time.asSeconds();
-	if (total_time > 10)
-	{
-		
-		board->shedule_for_deletion(this);
-		
-	}
 }

@@ -10,6 +10,7 @@
 #include<time.h>
 #include <list>
 #include <queue>
+#include "LocalPlayer.h"
 using namespace std;
 
 class BoardObject;
@@ -25,7 +26,7 @@ public:
 		this->board_height = 20;
 		generating_map();
 		assert(n_players != 0);//sprawdzenie liczby graczy i ich dodawanie
-		add_player(1, 1);
+		add_local_player(1, 1);
 		if (n_players > 1)add_player(this->board_width - 2, this->board_height - 2);
 		if (n_players > 2)add_player(this->board_width - 2, 1);
 		if (n_players > 3)add_player(1, this->board_height - 2);
@@ -249,6 +250,14 @@ private:
 	void add_player(int x, int y)
 	{
 		Player* new_player = new Player(this, x, y);
+		players.push_front(new_player);
+		//set_object({ x,y }, new_player);
+	}
+
+	//dodanie gracza
+	void add_local_player(int x, int y)
+	{
+		Player* new_player = new LocalPlayer(this, x, y);
 		players.push_front(new_player);
 		//set_object({ x,y }, new_player);
 	}

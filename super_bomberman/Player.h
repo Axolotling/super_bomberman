@@ -1,8 +1,7 @@
 #pragma once
 #include "BoardObject.h"
-#include "KeyboardSteering.h"
 #include <iostream>
-
+#include "ArrowsKeyboardSteering.h"
 
 
 class Player : public BoardObject
@@ -22,7 +21,7 @@ public:
 
 	double friction = 10;
 
-	KeyboardSteering steering;
+	Steering *steering;
 
 	void make_speed_smaller_or_equal_max();
 

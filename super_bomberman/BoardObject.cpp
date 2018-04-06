@@ -41,3 +41,16 @@ void BoardObject::display(sf::RenderWindow* window)
 		window->draw(*drawable);
 	}
 }
+
+void BoardObject::destroy()
+{
+	if (can_be_broken)
+	{
+		board->shedule_for_deletion(this);
+	}
+}
+
+void BoardObject::destroy_hard()
+{
+	board->shedule_for_deletion(this);
+}

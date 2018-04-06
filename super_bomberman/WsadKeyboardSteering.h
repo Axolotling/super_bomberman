@@ -1,33 +1,33 @@
-#ifndef KEYBOARDSTEERING_H
-#define KEYBOARDSTEERING_H
+#ifndef WSADKEYBOARDSTEERING_H
+#define WSADKEYBOARDSTEERING_H
 
 #include "Steering.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <list>
 
-class KeyboardSteering : public Steering
+class WsadKeyboardSteering : public Steering
 {
 public:
 	std::list<Action> determine_action() override
 	{
 		std::list<Action> actions;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			actions.push_front(GO_LEFT);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			actions.push_front(GO_RIGHT);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			actions.push_front(GO_UP);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			actions.push_front(GO_DOWN);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			actions.push_front(BOMB);
 		}
@@ -40,8 +40,8 @@ public:
 		return actions;
 	};
 
-	KeyboardSteering() {};
-	~KeyboardSteering() {};
+	WsadKeyboardSteering() {};
+	~WsadKeyboardSteering() {};
 };
 
 #endif

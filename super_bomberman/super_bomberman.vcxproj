@@ -25,11 +25,13 @@
     <ClInclude Include="Bomberman.h" />
     <ClInclude Include="Crate.h" />
     <ClInclude Include="Displayable.h" />
-    <ClInclude Include="KeyboardSteering.h" />
+    <ClInclude Include="ArrowsKeyboardSteering.h" />
+    <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Steering.h" />
+    <ClInclude Include="WsadKeyboardSteering.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

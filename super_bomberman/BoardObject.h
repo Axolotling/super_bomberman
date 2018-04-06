@@ -19,7 +19,7 @@ public:
 	Board *board;
 	int picture_slice_width;
 	int picture_slice_height;
-	double grid_cell_side = 40;
+	double grid_cell_side = 30;
 #define psw picture_slice_width
 #define psh picture_slice_height
 	sf::Texture *texture = new sf::Texture;
@@ -34,6 +34,11 @@ public:
 	void update(sf::Time delta_time) override;;
 
 	void display(sf::RenderWindow* window) override;;
+
+	
+	virtual void destroy();
+
+	void destroy_hard();
 
 	enum collision
 	{

@@ -56,10 +56,16 @@
     <ClInclude Include="Steering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardSteering.h">
+    <ClInclude Include="Bomb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.h">
+    <ClInclude Include="ArrowsKeyboardSteering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WsadKeyboardSteering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

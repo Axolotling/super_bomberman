@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Board.h"
 #include "Bomb.h"
+#include "WsadKeyboardSteering.h"
+
 #define epsilon 0.1
 
 Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(board, board_x, board_y, true, true)
@@ -14,6 +16,7 @@ Player::Player(Board* board, const double& board_x, const double& board_y): Boar
 	}
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setTexture(*texture);
+	steering = new WsadKeyboardSteering;
 }
 
 Player::~Player()
@@ -122,7 +125,7 @@ bool Player::is_there_collision_on_the_bottom()
 
 void Player::update(sf::Time delta_time)
 {
-	for (Steering::Action action : steering.determine_action())
+	for (Steering::Action action : steering->determine_action())
 	{
 		switch (action)
 		{
@@ -145,7 +148,7 @@ void Player::update(sf::Time delta_time)
 			int bomb_x = exact_x + 0.5;
 			int bomb_y = exact_y + 0.5;
 			BoardObject *board_object = board->get_object({ bomb_x, bomb_y });
-			if (board_object == nullptr);
+			if (board_object == nullptr)
 			{
 				assert(board_object == nullptr);
 				board->set_object({ bomb_x, bomb_y }, new Bomb(board, bomb_x, bomb_y));
@@ -192,7 +195,6 @@ void Player::update(sf::Time delta_time)
 		}
 	}
 	
-
 	BoardObject::update(delta_time);
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setPosition(grid_cell_side * exact_x, grid_cell_side * exact_y);
