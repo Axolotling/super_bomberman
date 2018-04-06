@@ -6,14 +6,26 @@
 
 class Player : public BoardObject
 {
+	int id;
+
 public:
-	Player(Board* board, const double& board_x, const double& board_y);;
-	~Player();;
+	Player(Board* board, const double& board_x, const double& board_y, int id);
+	~Player();
 
 	double exact_x;
 	double exact_y;
 	double speed_x = 0;
 	double speed_y = 0;
+
+	void setId(int value)
+	{
+		id = value;
+	}
+
+	int getId()
+	{
+		return id;
+	}
 
 	double max_speed = 3;
 

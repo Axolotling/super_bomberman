@@ -10,7 +10,7 @@ Bomb::Bomb(Board* board, const double& board_x, const double& board_y): BoardObj
 	}
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setTexture(*texture);
-	time_to_go_off = 3;
+	time_to_go_off = 0.1;
 }
 
 Bomb::~Bomb()

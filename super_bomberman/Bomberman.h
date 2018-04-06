@@ -18,15 +18,15 @@ public:
 
 		std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow(sf::VideoMode(window_width, window_height), "Bomberman"));
 		window->setFramerateLimit(framerate);
-		
+		ActionLog action_log;
+
+
 		sf::Event event;
 		sf::Clock clock;
 		sf::Time last_update_time = clock.getElapsedTime();
 
 		Scene *scene = new Scene;
-		Board* board = new Board(2);
-	//	board->key_erase({ 3, 0 });
-	//	board->key_erase({ 3, 0 });
+		Board* board = new Board(2, &action_log);
 
 		scene->add(board);
 		while (window->isOpen())

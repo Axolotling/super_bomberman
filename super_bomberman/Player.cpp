@@ -5,8 +5,9 @@
 
 #define epsilon 0.1
 
-Player::Player(Board* board, const double& board_x, const double& board_y): BoardObject(board, board_x, board_y, true, true)
+Player::Player(Board* board, const double& board_x, const double& board_y, int id): BoardObject(board, board_x, board_y, true, true)
 {
+	setId(id);
 	exact_x = board_x;
 	exact_y = board_y;
 	//std::cout << "Created Player Object" << std::endl;

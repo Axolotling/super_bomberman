@@ -11,18 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionLog.cpp" />
     <ClCompile Include="BoardObject.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="Crate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionLog.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardObject.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bomberman.h" />
+    <ClInclude Include="Communicator.h" />
     <ClInclude Include="Crate.h" />
     <ClInclude Include="Displayable.h" />
     <ClInclude Include="ArrowsKeyboardSteering.h" />
