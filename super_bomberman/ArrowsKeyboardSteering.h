@@ -1,10 +1,11 @@
-#ifndef KEYBOARDSTEERING_H
-#define KEYBOARDSTEERING_H
+#ifndef ARROWSKEYBOARDSTEERING_H
+#define ARROWSKEYBOARDSTEERING_H
 
 #include "Steering.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <list>
 
-class KeyboardSteering : public Steering
+class ArrowsKeyboardSteering : public Steering
 {
 public:
 	std::list<Action> determine_action() override
@@ -26,6 +27,11 @@ public:
 		{
 			actions.push_front(GO_DOWN);
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		{
+			actions.push_front(BOMB);
+		}
+
 
 		if (actions.empty())
 		{
@@ -34,8 +40,8 @@ public:
 		return actions;
 	};
 
-	KeyboardSteering() {};
-	~KeyboardSteering() {};
+	ArrowsKeyboardSteering() {};
+	~ArrowsKeyboardSteering() {};
 };
 
 #endif

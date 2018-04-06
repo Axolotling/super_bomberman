@@ -1,39 +1,42 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-
-
+#pragma once
 #include "BoardObject.h"
-#include <set>
+#include <iostream>
+#include "ArrowsKeyboardSteering.h"
 
 
 class Player : public BoardObject
 {
 public:
-// Public definitions
-	enum Orientation
-	{
-		north,
-		east,
-		west,
-		south
-	};
+	Player(Board* board, const double& board_x, const double& board_y);;
+	~Player();;
 
-// Private fields
-	double exact_x, exact_y;
-	double x_velocity, y_velocity;
-	void move_player(double x, double y);
-// Public fields
-	Orientation orientation;
+	double exact_x;
+	double exact_y;
+	double speed_x = 0;
+	double speed_y = 0;
 
-// Constructors and destructors
-	Player(BombermanGame*const bomberman_game, const int& board_x, const int& board_y);
+	double max_speed = 3;
 
-// Private methods
-// Public methods
-	std::set<collision> check_collision_with(BoardObject* board_object);
+	double acceleration = 50;
 
-	std::set<collision> check_collisions();
+	double friction = 10;
+
+	Steering *steering;
+
+	void make_speed_smaller_or_equal_max();
+
+	void apply_friction_to_speed(const sf::Time& delta_time);
+
+	bool is_there_collision_on_the_right();
+	bool is_object_on_field(int checked_x, int checked_y);
+
+	bool is_there_collision_on_the_left();
+
+	bool is_there_collision_on_the_top();
+
+	bool is_there_collision_on_the_bottom();
+
+	void update(sf::Time delta_time) override;;
+
 };
 
-
-#endif
