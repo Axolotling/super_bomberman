@@ -12,15 +12,9 @@ void Communicator::parse_message()
 	{
 		int i = 1;
 
-		if (recieved_message[i] == ';')
-		{
-			while (recieved_message[i] != ActionLog::end_rozkaz)
-			{
-				
-			}
-		}
 
-
+		//if (recieved_message[i] == ';')
+		
 	}
 }
 

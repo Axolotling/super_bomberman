@@ -58,15 +58,48 @@ public:
 		}
 
 
-		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
+			if (get_was_up_key_pressed() == false)
+			{
+				//add communicate
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_pressed));
+				set_was_up_key_pressed(true);
+			}
 			actions.push_front(GO_UP);
 		}
+		else
+		{
+			if (get_was_up_key_pressed() == true)
+			{
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_released));
+			}
+			set_was_up_key_pressed(false);
+		}		
+
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
+			if (get_was_down_key_pressed() == false)
+			{
+				//add communicate
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_pressed));
+				set_was_down_key_pressed(true);
+			}
 			actions.push_front(GO_DOWN);
 		}
+		else
+		{
+			if (get_was_down_key_pressed() == true)
+			{
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_released));
+			}
+			set_was_down_key_pressed(false);
+		}
+		
+
+
+		////////do dokonczenie wysylanie komunikatow w zaleznosci od pozosta³ych zdarzeñ
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
 			actions.push_front(BOMB);
