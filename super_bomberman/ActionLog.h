@@ -8,7 +8,7 @@ class ActionLog
 public:
 	enum Communicate
 	{
-		key_up_pressed,
+		key_up_pressed = 10, // enum zaczyna od 10
 		key_down_pressed,
 		key_left_pressed,
 		key_right_pressed,
@@ -19,19 +19,20 @@ public:
 		put_bomb,
 		erase_crate,
 		get_bonus,
-		kill_player//,
-		//start_rozkaz,
-		//end_rozkaz
+		kill_player
 	};
+	
 
-	void send_communicates_to_server();
-
-	std::string concatenate_communicates_from_list();
+	std::string create_final_message_from_list();
 
 	std::string communicate_to_string(Communicate communicate);
 
 	std::list<std::string> communicates_to_send;
 
+	bool is_empty()
+	{
+		return communicates_to_send.empty();
+	}
 
 	void clear_communicates_to_send();
 

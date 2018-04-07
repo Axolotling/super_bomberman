@@ -1,15 +1,12 @@
 #include "ActionLog.h"
+#include <iostream>
 
 
-void ActionLog::send_communicates_to_server()
+std::string ActionLog::create_final_message_from_list()
 {
-	std::string whole_communicate;
-	whole_communicate += concatenate_communicates_from_list();
-}
-
-std::string ActionLog::concatenate_communicates_from_list()
-{
-	std::string result; //+getPlayerId
+	std::cout << "created final communicate" << std::endl;
+	std::string result;
+	result = playerid; //+getPlayerId
 	result += ";";
 	for (std::string one_string : communicates_to_send)
 	{
@@ -43,7 +40,6 @@ std::string ActionLog::communicate_to_string(Communicate communicate)
 		return std::to_string(communicate) + ";";
 		break;
 	case put_bomb:
-	case erase_crate:
 	case get_bonus:
 	case kill_player:
 	default: ;

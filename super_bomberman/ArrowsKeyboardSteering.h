@@ -23,7 +23,7 @@ public:
 			if (get_was_left_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_pressed));
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_pressed));			
 				set_was_left_key_pressed(true);
 			}
 			actions.push_front(GO_LEFT);

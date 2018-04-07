@@ -3,6 +3,7 @@
 #include<map>
 #include<set>
 #include<assert.h>
+#define _WINSOCKAPI_
 #include<windows.h>
 #include"Rock.h"
 #include"Crate.h"
