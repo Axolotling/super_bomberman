@@ -23,7 +23,7 @@ public:
 			if (get_was_left_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->getCommunicate(ActionLog::key_left_pressed));
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_pressed));
 				set_was_left_key_pressed(true);
 			}
 			actions.push_front(GO_LEFT);
@@ -32,7 +32,7 @@ public:
 		{
 			if (get_was_left_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->getCommunicate(ActionLog::key_left_released));
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_released));
 			}
 			set_was_left_key_pressed(false);
 		}
@@ -43,7 +43,7 @@ public:
 			if (get_was_right_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->getCommunicate(ActionLog::key_right_pressed));
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_pressed));
 				set_was_right_key_pressed(true);
 			}
 			actions.push_front(GO_RIGHT);
@@ -52,7 +52,7 @@ public:
 		{
 			if (get_was_right_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->getCommunicate(ActionLog::key_right_released));
+				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_released));
 			}
 			set_was_right_key_pressed(false);
 		}

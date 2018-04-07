@@ -27,8 +27,12 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ActionLog.cpp" />
-    <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="Communicator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bomberman.h">
@@ -70,7 +74,11 @@
     <ClInclude Include="LocalPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ActionLog.h" />
-    <ClInclude Include="Communicator.h" />
+    <ClInclude Include="Communicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
