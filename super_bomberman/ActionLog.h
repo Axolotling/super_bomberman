@@ -1,11 +1,35 @@
 #pragma once
 #include <list>
 #include <string>
+//#include "LocalPlayer.h"
 
 class ActionLog
 {
 	int playerid;
+	//LocalPlayer *local_player;
+	int current_pos_x;
+	int current_pos_y;
 public:
+	float get_current_pos_x() const
+	{
+		return current_pos_x;
+	}
+
+	void set_current_pos_x(float current_pos_x)
+	{
+		this->current_pos_x = current_pos_x;
+	}
+
+	float get_current_pos_y() const
+	{
+		return current_pos_y;
+	}
+
+	void set_current_pos_y(float current_pos_y)
+	{
+		this->current_pos_y = current_pos_y;
+	}
+
 	enum Communicate
 	{
 		key_up_pressed = 10, // enum zaczyna od 10
@@ -38,7 +62,8 @@ public:
 
 	void push_communicate(std::string single_communicate);
 	
-	ActionLog(int playerid);
+	ActionLog(int playerId);
+	//ActionLog(LocalPlayer* player);
 	~ActionLog();
 };
 

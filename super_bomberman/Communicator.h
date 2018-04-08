@@ -37,15 +37,23 @@ class Communicator
 	std::string message;
 
 public:
-	std::string get_recieved_message()
+	std::string pop_first_recieved_message()
 	{
-		return recieved_message;
+		std::string result = recieved_messages.front();
+		recieved_messages.pop();
+		return result;
 	}
+
+	/*std::queue<std::string>* pop_first_recieved_messages_list()
+	{
+		return &recieved_messages;
+	}*/
+
 	void parse_message();
 	
-	bool is_message_empty()
+	bool is_message_list_empty()
 	{
-		return recieved_message.empty();
+		return recieved_messages.empty();
 	}
 
 

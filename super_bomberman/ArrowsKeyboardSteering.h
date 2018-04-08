@@ -104,7 +104,8 @@ public:
 		////////do dokonczenie wysylanie komunikatow w zaleznosci od pozosta³ych zdarzeñ
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
-			actions.push_front(BOMB);
+			action_log->push_communicate(action_log->communicate_to_string(ActionLog::put_bomb));
+			//actions.push_front(BOMB);
 		}
 
 

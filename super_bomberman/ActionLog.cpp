@@ -40,15 +40,24 @@ std::string ActionLog::communicate_to_string(Communicate communicate)
 		return std::to_string(communicate) + ";";
 		break;
 	case put_bomb:
+		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x()+0.5)+';'+ std::to_string(get_current_pos_y()+0.5)+';';
 	case get_bonus:
+		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x()+0.5) + ';' + std::to_string(get_current_pos_y()+0.5) + ';';
 	case kill_player:
 	default: ;
 	}
 }
 
-ActionLog::ActionLog(int playerid)
+//ActionLog::ActionLog(LocalPlayer *player)
+//{
+//	local_player = player;
+//	this->playerid = player->getId();
+//}
+
+ActionLog::ActionLog(int playerId)
 {
-	this->playerid = playerid;
+	//local_player = player;
+	this->playerid = playerId; //player->getId();
 }
 
 

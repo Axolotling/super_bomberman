@@ -11,6 +11,7 @@ class ServerSteering : public Steering
 	//ActionLog *action_log;
 
 	int playerid;
+	Board *board;
 public:
 
 	void ServerSteering::parse_message(std::string recieved_message)
@@ -19,15 +20,96 @@ public:
 		int id = atoi(temp.data());
 		if (id == playerid)
 		{
-			while (true)
+			cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
+			int parsed_int;
+
+			for (int i = 2; i < recieved_message.length();) {
+
+				std::string parsed_string = recieved_message.substr(i, i+2);
+				parsed_int = atoi(parsed_string.data());
+
+				cout << "parsowany rozkaz to " << parsed_int << endl;
+
+				i += 3;
+				switch (static_cast<ActionLog::Communicate>(parsed_int)) {
+				case ActionLog::key_up_pressed:
+					set_was_up_key_pressed(true);
+					break;
+				case ActionLog::key_down_pressed:
+					set_was_down_key_pressed(true);
+					break;
+				case ActionLog::key_left_pressed:
+					set_was_left_key_pressed(true);
+					break;
+				case ActionLog::key_right_pressed:
+					set_was_right_key_pressed(true);
+					break;
+				case ActionLog::key_up_released:
+					set_was_up_key_pressed(false);
+					break;
+				case ActionLog::key_down_released:
+					set_was_down_key_pressed(false);
+					break;
+				case ActionLog::key_left_released:
+					set_was_left_key_pressed(false);
+					break;
+				case ActionLog::key_right_released:
+					set_was_right_key_pressed(false);
+					break;
+				case ActionLog::put_bomb: {
+					int j = i;
+					
+					while (recieved_message[j] != ';') j++;
+					parsed_string = recieved_message.substr(i, j);
+					parsed_int = atoi(parsed_string.data());
+					//uzywamy x
+					int x = parsed_int;
+					j++;
+					i = j;
+					while (recieved_message[j] != ';') j++;
+					parsed_string = recieved_message.substr(i, j);
+					parsed_int = atoi(parsed_string.data());
+					int y = parsed_int;
+					i = j;
+					i++;
+					if (board->get_object({ x, y }) == nullptr)
+					{
+						board->set_object({ x, y }, new Bomb(board, x, y));
+					}
+					
+				}
+					break;
+				
+				case ActionLog::erase_crate: break;
+				case ActionLog::get_bonus: break;
+				case ActionLog::kill_player: break;
+				default:;
+				}
+			//	while (recieved_message[i] != ';') i++;
+				
+					
+				
+
+			}
+			/*
+			int x = 1;
+
+			for (int i = 0; i < recieved_message.length(); i++)
+			{
+				recieved_message[i] == ';';
+			}
+
+			set_was_down_key_pressed(true);
+			while (x--)
 			{
 				int i = 1;
-				cout << "hehe " << endl;
+				//cout << "hehe " << endl;
 				//if (recieved_message[i] == ';')
+
 				
 			}
+			*/
 		}
-		
 	}
 
 
@@ -64,7 +146,7 @@ public:
 	};
 
 
-	ServerSteering(int playerid) : playerid(playerid)
+	ServerSteering(int playerid, Board *board) : playerid(playerid), board(board)
 	{
 		//this->action_log = action_log;
 	};

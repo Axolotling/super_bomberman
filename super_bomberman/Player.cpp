@@ -6,12 +6,13 @@
 
 #define epsilon 0.1
 
-Player::Player(Board* board, const double& board_x, const double& board_y, int id, Communicator *communicator): BoardObject(board, board_x, board_y, true, true)
+Player::Player(Board* board, const double& board_x, const double& board_y, int id, ActionLog *action_log,Communicator *communicator): BoardObject(board, board_x, board_y, true, true)
 {
 	this->communicator = communicator;
 	setId(id);
 	exact_x = board_x;
 	exact_y = board_y;
+	this->action_log = action_log;
 	//std::cout << "Created Player Object" << std::endl;
 	if (!texture->loadFromFile("player.png"))
 	{
@@ -19,7 +20,8 @@ Player::Player(Board* board, const double& board_x, const double& board_y, int i
 	}
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setTexture(*texture);
-	steering = new ServerSteering(getId());
+	steering = new ServerSteering(getId(), board);
+	
 }
 
 Player::~Player()
@@ -130,10 +132,25 @@ void Player::update(sf::Time delta_time)
 {
 	if(ServerSteering *server_steering = dynamic_cast<ServerSteering*>(steering))
 	{
+		string message;
+		while (!communicator->is_message_list_empty())
+		{
+			message = communicator->pop_first_recieved_message();
+			if (!message.empty())
+			{
+				server_steering->parse_message(message);
+			}
+			else
+			{
+				cout << "Otrzymalismy pusta wiadomosc :/" << endl;
+			}
+		}
+
+		/*
 		if (!communicator->is_message_empty())
 		{
 			server_steering->parse_message(communicator->get_recieved_message());
-		}
+		}*/
 	}
 	for (Steering::Action action : steering->determine_action())
 	{
@@ -172,6 +189,9 @@ void Player::update(sf::Time delta_time)
 
 	exact_x = exact_x + speed_x * delta_time.asSeconds();
 	exact_y = exact_y + speed_y * delta_time.asSeconds();
+	action_log->set_current_pos_x(exact_x);
+	action_log->set_current_pos_y(exact_y);
+
 	if (speed_x > 0)
 	{
 		if (is_there_collision_on_the_right())

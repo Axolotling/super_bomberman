@@ -43,7 +43,9 @@ void Communicator::process_client(client_type& new_client)
 			if (iResult != SOCKET_ERROR) 
 			{
 				std::cout << new_client.received_message << std::endl;//tu bêdzie wywo³ywana metoda od parsowania zachowañ graczy
-				recieved_messages.push(recieved_message);
+				recieved_messages.push(new_client.received_message);
+				//std::cout << "Pushowanko do kolejeczki takiego czegos: " << recieved_message<< std::endl;
+
 			}
 
 			else

@@ -8,9 +8,11 @@ class Player : public BoardObject
 {
 	int id;
 	Communicator *communicator;
+	ActionLog *action_log;
+
 
 public:
-	Player(Board* board, const double& board_x, const double& board_y, int id, Communicator *communicator);
+	Player(Board* board, const double& board_x, const double& board_y, int id, ActionLog *action_log,Communicator *communicator);
 	~Player();
 
 	double exact_x;
