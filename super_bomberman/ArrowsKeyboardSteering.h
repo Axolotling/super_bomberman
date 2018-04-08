@@ -5,6 +5,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <list>
 #include "ActionLog.h"
+#include "Communicator.h"
 
 class ArrowsKeyboardSteering : public Steering
 {
@@ -12,6 +13,7 @@ class ArrowsKeyboardSteering : public Steering
 
 public:
 
+	
 
 	std::list<Action> determine_action() override
 	{

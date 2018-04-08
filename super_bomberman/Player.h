@@ -7,9 +7,10 @@
 class Player : public BoardObject
 {
 	int id;
+	Communicator *communicator;
 
 public:
-	Player(Board* board, const double& board_x, const double& board_y, int id);
+	Player(Board* board, const double& board_x, const double& board_y, int id, Communicator *communicator);
 	~Player();
 
 	double exact_x;
@@ -48,7 +49,7 @@ public:
 
 	bool is_there_collision_on_the_bottom();
 
-	void update(sf::Time delta_time) override;;
+	void update(sf::Time delta_time) override;
 
 };
 

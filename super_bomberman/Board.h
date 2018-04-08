@@ -20,25 +20,24 @@ class Board : public Displayable
 {
 public:
 	//losowo generowana mapa(podac liczbe graczy)
-	Board(int n_players, ActionLog *action_log)
+	Board(int n_players, ActionLog *action_log, Communicator *communicator)
 	{
 		///this->bomberman_game = bomberman_game;
 		this->board_width = 30; //aktualnie tylko stosunek 3:2 ma sens, inne nie dzia³aja poprawnie
 		this->board_height = 20;
 		generating_map();
 		assert(n_players != 0);//sprawdzenie liczby graczy i ich dodawanie
-		add_local_player(1, 1, 0, action_log);
+		add_local_player(1, 1, 0, action_log, communicator);
 		if (n_players > 1)
 		{
-			add_player(this->board_width - 2, this->board_height - 2, 1);
-
+			add_player(this->board_width - 2, this->board_height - 2, 0, communicator);
 		}
 		if (n_players > 2)
 		{
-			add_player(this->board_width - 2, 1, 2);
+			add_player(this->board_width - 2, 1, 2, communicator);
 		}
 		if (n_players > 3) {
-			add_player(1, this->board_height - 2, 3);
+			add_player(1, this->board_height - 2, 3, communicator);
 		}
 	}
 
@@ -257,17 +256,17 @@ private:
 	}
 
 	//dodanie gracza
-	void add_player(int x, int y, int id)
+	void add_player(int x, int y, int id, Communicator *communicator)
 	{
-		Player* new_player = new Player(this, x, y, id);
+		Player* new_player = new Player(this, x, y, id, communicator);
 		players.push_front(new_player);
 		//set_object({ x,y }, new_player);
 	}
 
 	//dodanie gracza
-	void add_local_player(int x, int y, int id, ActionLog *action_log)
+	void add_local_player(int x, int y, int id, ActionLog *action_log, Communicator *communicator)
 	{
-		Player* new_player = new LocalPlayer(this, x, y, id, action_log);
+		Player* new_player = new LocalPlayer(this, x, y, id, action_log, communicator);
 		players.push_front(new_player);
 		//set_object({ x,y }, new_player);
 	}

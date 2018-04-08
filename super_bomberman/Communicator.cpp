@@ -15,14 +15,15 @@ void Communicator::parse_message()
 	std::string temp = recieved_message.substr(0, 1);
 	int id = atoi(temp.data()); 
 
-	while(1)
+/*	while(1)
 	{
 		int i = 1;
 
 
 		//if (recieved_message[i] == ';')
 		
-	}
+	}*/
+
 }
 
 
@@ -30,30 +31,31 @@ void Communicator::parse_message()
 
 
 
-int Communicator::process_client(client_type& new_client)
+void Communicator::process_client(client_type& new_client)
 {
-	while (1)
-	{
+	while (2137) {
 		memset(new_client.received_message, 0, DEFAULT_BUFLEN);
 
 		if (new_client.socket != 0)
 		{
 			int iResult = recv(new_client.socket, new_client.received_message, DEFAULT_BUFLEN, 0);
 
-			if (iResult != SOCKET_ERROR)
+			if (iResult != SOCKET_ERROR) 
+			{
 				std::cout << new_client.received_message << std::endl;//tu bêdzie wywo³ywana metoda od parsowania zachowañ graczy
+				recieved_messages.push(recieved_message);
+			}
+
 			else
 			{
 				std::cout << "recv() failed: " << WSAGetLastError() << std::endl;
-				break;
 			}
 		}
+		if (WSAGetLastError() == WSAECONNRESET)
+			std::cout << "The server has disconnected" << std::endl;
+	
 	}
-
-	if (WSAGetLastError() == WSAECONNRESET)
-		std::cout << "The server has disconnected" << std::endl;
-
-	return 0;
+		
 }
 
 bool Communicator::send_message(std::string message)
@@ -71,6 +73,28 @@ bool Communicator::send_message(std::string message)
 	return true;
 	//Sleep(1000);
 
+}
+
+void Communicator::get_message()
+{
+	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
+	message = client.received_message;
+
+	if (message != "Server is full")
+	{
+		client.id = atoi(client.received_message);
+
+		std::thread my_thread(&Communicator::process_client, this, client);
+
+		//process_client(client);
+
+		//send_message();
+
+		//Shutdown the connection since no more data will be sent
+		my_thread.detach();
+	}
+	else
+		std::cout << client.received_message << std::endl;
 }
 
 int Communicator::connect_to_server()
@@ -138,26 +162,12 @@ int Communicator::connect_to_server()
 
 	std::cout << "Successfully Connected" << std::endl;
 
+	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	//Obtain id from server for this client;
-	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
-	message = client.received_message;
+	
+	
+	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-	if (message != "Server is full")
-	{
-		client.id = atoi(client.received_message);
-
-		std::thread my_thread(&Communicator::process_client, this, client);
-
-		//process_client(client);
-
-		//send_message();
-
-		//Shutdown the connection since no more data will be sent
-		my_thread.detach();
-	}
-	else
-		std::cout << client.received_message << std::endl;
-			
 	return 0;
 }
 

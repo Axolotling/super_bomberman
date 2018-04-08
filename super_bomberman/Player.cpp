@@ -2,11 +2,13 @@
 #include "Board.h"
 #include "Bomb.h"
 #include "WsadKeyboardSteering.h"
+#include "ServerSteering.h"
 
 #define epsilon 0.1
 
-Player::Player(Board* board, const double& board_x, const double& board_y, int id): BoardObject(board, board_x, board_y, true, true)
+Player::Player(Board* board, const double& board_x, const double& board_y, int id, Communicator *communicator): BoardObject(board, board_x, board_y, true, true)
 {
+	this->communicator = communicator;
 	setId(id);
 	exact_x = board_x;
 	exact_y = board_y;
@@ -17,7 +19,7 @@ Player::Player(Board* board, const double& board_x, const double& board_y, int i
 	}
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setTexture(*texture);
-	steering = new WsadKeyboardSteering;
+	steering = new ServerSteering(getId());
 }
 
 Player::~Player()
@@ -126,6 +128,13 @@ bool Player::is_there_collision_on_the_bottom()
 
 void Player::update(sf::Time delta_time)
 {
+	if(ServerSteering *server_steering = dynamic_cast<ServerSteering*>(steering))
+	{
+		if (!communicator->is_message_empty())
+		{
+			server_steering->parse_message(communicator->get_recieved_message());
+		}
+	}
 	for (Steering::Action action : steering->determine_action())
 	{
 		switch (action)

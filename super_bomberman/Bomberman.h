@@ -14,6 +14,7 @@ public:
 	Bomberman()
 	{		
 		Communicator *communicator = new Communicator;
+		communicator->get_message();
 
 
 
@@ -31,14 +32,13 @@ public:
 		sf::Time last_update_time = clock.getElapsedTime();
 
 		Scene *scene = new Scene;
-		Board* board = new Board(2, &action_log);
+		Board* board = new Board(2, &action_log, communicator);
 
 		scene->add(board);
 
 
 		
-
-
+		float remembered_time = clock.getElapsedTime().asSeconds();
 		while (window->isOpen())
 		{			
 			const sf::Time delta_time = clock.getElapsedTime() - last_update_time;
@@ -48,13 +48,24 @@ public:
 
 			if (!action_log.is_empty())
 			{
-				while(!communicator->send_message(action_log.create_final_message_from_list()))
+				if(!communicator->send_message(action_log.create_final_message_from_list()))
 				{
 					cout << "Wyslanie nie powiodlo sie :(" << endl;
 				};
 				action_log.clear_communicates_to_send();
 			}
+
+		
+
+			/*if (clock.getElapsedTime().asSeconds() >= remembered_time+1)
+			{
+				communicator->get_message(); //otrzymywanie wiadomosci od serwera
+				cout << "poke" << endl;
+				remembered_time = clock.getElapsedTime().asSeconds();
+			}*/
 			
+
+		
 			scene->update(delta_time);
 			scene->display(window.get());
 			window->display();

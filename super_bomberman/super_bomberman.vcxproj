@@ -34,6 +34,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="ServerSteering.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="WsadKeyboardSteering.h" />
   </ItemGroup>
