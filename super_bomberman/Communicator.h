@@ -10,7 +10,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFLEN 512            
-#define IP_ADDRESS "127.0.0.1"
+#define IP_ADDRESS "153.19.211.51"
 #define DEFAULT_PORT "3504"
 
 class Communicator
