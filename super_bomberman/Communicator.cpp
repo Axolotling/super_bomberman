@@ -6,34 +6,36 @@
 #include <iostream>
 //#include <ws2tcpip.h>
 #include <thread>
+#include "ServerSteering.h"
 
 
-
+/*
 void Communicator::parse_message()
 {
 	recieved_message;
 	std::string temp = recieved_message.substr(0, 1);
 	int id = atoi(temp.data()); 
 
-/*	while(1)
+	while(1)
 	{
 		int i = 1;
 
 
 		//if (recieved_message[i] == ';')
 		
-	}*/
+	}
 
 }
+*/
 
 
 
 
 
 
-void Communicator::process_client(client_type& new_client)
+void Communicator::proccess_other_players(client_type& new_client)
 {
-	while (2137) {
+	while (1) {
 		memset(new_client.received_message, 0, DEFAULT_BUFLEN);
 
 		if (new_client.socket != 0)
@@ -42,20 +44,22 @@ void Communicator::process_client(client_type& new_client)
 
 			if (iResult != SOCKET_ERROR) 
 			{
-				std::cout << new_client.received_message << std::endl;//tu bêdzie wywo³ywana metoda od parsowania zachowañ graczy
+				//wyswietl otrzymana wiadomosc
+				std::cout << new_client.received_message << std::endl; 
+				//wrzuc do kolejki do przetwarzania otrzymywanych wiadomosci
 				recieved_messages.push(new_client.received_message);
+				//przetwarzanie kazdej kolejnej wiadomosci? uzywac mutexow? wywolanie dopiero gdzieœ póŸniej przetwarzania?
+				//ServerSteering::parse_message(recieved_message);
+
 				//std::cout << "Pushowanko do kolejeczki takiego czegos: " << recieved_message<< std::endl;
-
 			}
-
 			else
 			{
 				std::cout << "recv() failed: " << WSAGetLastError() << std::endl;
 			}
 		}
 		if (WSAGetLastError() == WSAECONNRESET)
-			std::cout << "The server has disconnected" << std::endl;
-	
+			std::cout << "The server has disconnected" << std::endl;	
 	}
 		
 }
@@ -77,29 +81,17 @@ bool Communicator::send_message(std::string message)
 
 }
 
+
+//odbieranie kolejnych wiadomosci od serwera
+/*
 void Communicator::get_message()
-{
+{	
 	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
-	message = client.received_message;
-
-	if (message != "Server is full")
-	{
-		client.id = atoi(client.received_message);
-
-		std::thread my_thread(&Communicator::process_client, this, client);
-
-		//process_client(client);
-
-		//send_message();
-
-		//Shutdown the connection since no more data will be sent
-		my_thread.detach();
-	}
-	else
-		std::cout << client.received_message << std::endl;
+	message = client.received_message;	
 }
+*/
 
-int Communicator::connect_to_server()
+bool Communicator::connect_to_server()
 {
 	std::cout << "Starting Client...\n";
 
@@ -108,7 +100,7 @@ int Communicator::connect_to_server()
 	if (iResult != 0)
 	{
 		std::cout << "WSAStartup() failed with error: " << iResult << std::endl;
-		return 1;
+		return false;
 	}
 
 	ZeroMemory(&hints, sizeof(hints));
@@ -165,12 +157,30 @@ int Communicator::connect_to_server()
 	std::cout << "Successfully Connected" << std::endl;
 
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	//Obtain id from server for this client;
+	//Obtain id from server for this client;	
 	
 	
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-	return 0;
+	return true;
+}
+
+void Communicator::get_player_id_from_server()
+{
+	//odebranie id gracza od serwera
+	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
+	message = client.received_message;
+	client.id = atoi(client.received_message);
+	if (message != "Server is full"){
+
+		//tworzenie watku do odbierania wiadomosci od pozostalych graczy
+		std::thread my_thread(&Communicator::proccess_other_players, this, client);
+		//dzialanie niezalezne w watku
+		my_thread.detach();
+	}
+	else
+		std::cout << client.received_message << std::endl;
+
 }
 
 void Communicator::close_connection()
@@ -190,9 +200,8 @@ void Communicator::close_connection()
 
 Communicator::Communicator()
 {	
-	connect_to_server();
-	//std::thread communication_thread(&Communicator::send_message, this);
-	//communication_thread.detach();
+	//jezeli pomyslnie polaczono z serwerem odbierz id w celu ustawienia pozycji na mapie
+	if (connect_to_server()) get_player_id_from_server();	
 }
 
 

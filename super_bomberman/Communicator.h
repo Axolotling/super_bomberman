@@ -5,6 +5,7 @@
 #include <winsock2.h>
 #include <list>
 #include <queue>
+#include<thread>
 
 
 #pragma comment (lib, "Ws2_32.lib")
@@ -49,7 +50,8 @@ public:
 		return &recieved_messages;
 	}*/
 
-	void parse_message();
+	//parsowanie przerzucone do ServerSteering
+	//void parse_message();
 	
 	bool is_message_list_empty()
 	{
@@ -57,13 +59,15 @@ public:
 	}
 
 
-	void process_client(client_type &new_client);
+	
+	//czasowo nie uzywac (brak uzasadnienia do uzycia - zastapione przez procces_other_players)
+	//void get_message();
+
+
+	bool connect_to_server();
+	void get_player_id_from_server();
+	void proccess_other_players(client_type &new_client);
 	bool send_message(std::string message);
-	void get_message();
-
-
-	int connect_to_server();
-
 	void close_connection();
 
 	Communicator();
