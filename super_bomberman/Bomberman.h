@@ -16,7 +16,11 @@ public:
 		Communicator *communicator = new Communicator;
 		//communicator->get_message();
 
-
+		//nieskonczony while z ifem get_current_players_number -> break
+		while(true)
+		{
+			if (communicator->get_current_player_number() == 2) break;
+		}
 
 		int window_height = 720; 
 		int window_width = 1080;
@@ -32,7 +36,7 @@ public:
 		sf::Time last_update_time = clock.getElapsedTime();
 
 		Scene *scene = new Scene;
-		Board* board = new Board(2, &action_log, communicator);
+		Board* board = new Board(3, &action_log, communicator);
 
 		scene->add(board);
 

@@ -18,12 +18,14 @@ class BoardObject;
 
 class Board : public Displayable
 {
+	Communicator *communicator;
 	
 public:
 	//losowo generowana mapa(podac liczbe graczy)
 	Board(int n_players, ActionLog *action_log, Communicator *communicator)
 	{
 		///this->bomberman_game = bomberman_game;
+		this->communicator = communicator;
 		this->board_width = 30; //aktualnie tylko stosunek 3:2 ma sens, inne nie dzia³aja poprawnie
 		this->board_height = 20;
 		generating_map();
@@ -40,6 +42,11 @@ public:
 		if (n_players > 3) {
 			add_player(1, this->board_height - 2, 3, action_log, communicator);
 		}
+	}
+
+	Communicator* get_communicator()
+	{
+		return this->communicator;
 	}
 
 

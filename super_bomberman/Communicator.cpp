@@ -189,3 +189,13 @@ Communicator::~Communicator()
 {
 	close_connection();
 }
+
+int Communicator::get_current_player_number()
+{
+	return this->current_player_numbers;
+}
+
+void Communicator::set_current_player_number(const int n)
+{
+	this->current_player_numbers = n;
+}

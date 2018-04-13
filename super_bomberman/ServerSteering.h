@@ -20,6 +20,7 @@ public:
 	{
 		std::string temp = recieved_message.substr(0, 1);
 		int id = atoi(temp.data());
+		if (id > this->board->get_communicator()->get_current_player_number()) this->board->get_communicator()->set_current_player_number(id);
 		if (id == playerid)
 		{
 			cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
@@ -86,6 +87,8 @@ public:
 				case ActionLog::kill_player: break;
 				default:;
 				}
+
+
 			//	while (recieved_message[i] != ';') i++;
 				
 			}
@@ -107,6 +110,10 @@ public:
 				
 			}
 			*/
+		}
+		else
+		{
+			
 		}
 	}
 

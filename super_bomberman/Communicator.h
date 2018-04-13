@@ -11,7 +11,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFLEN 512            
-#define IP_ADDRESS "192.168.43.79"
+#define IP_ADDRESS "42.0.135.38"
 #define DEFAULT_PORT "3504"
 
 class Communicator
@@ -33,6 +33,7 @@ class Communicator
 	std::string sent_message = "";
 	client_type client = { INVALID_SOCKET, -1, "" };
 	int iResult = 0;
+	int current_player_numbers = 0;
 	std::string message;
 
 public:
@@ -70,5 +71,7 @@ public:
 
 	Communicator();
 	~Communicator();
+	int get_current_player_number();
+	void set_current_player_number(int n);
 };
 
