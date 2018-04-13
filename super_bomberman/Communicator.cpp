@@ -8,31 +8,6 @@
 #include <thread>
 #include "ServerSteering.h"
 
-
-/*
-void Communicator::parse_message()
-{
-	recieved_message;
-	std::string temp = recieved_message.substr(0, 1);
-	int id = atoi(temp.data()); 
-
-	while(1)
-	{
-		int i = 1;
-
-
-		//if (recieved_message[i] == ';')
-		
-	}
-
-}
-*/
-
-
-
-
-
-
 void Communicator::proccess_other_players(client_type& new_client)
 {
 	while (1) {
@@ -48,8 +23,11 @@ void Communicator::proccess_other_players(client_type& new_client)
 				std::cout << new_client.received_message << std::endl; 
 				//wrzuc do kolejki do przetwarzania otrzymywanych wiadomosci
 				recieved_messages.push(new_client.received_message);
+
 				//przetwarzanie kazdej kolejnej wiadomosci? uzywac mutexow? wywolanie dopiero gdzieœ póŸniej przetwarzania?
+				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 				//ServerSteering::parse_message(recieved_message);
+				//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 				//std::cout << "Pushowanko do kolejeczki takiego czegos: " << recieved_message<< std::endl;
 			}

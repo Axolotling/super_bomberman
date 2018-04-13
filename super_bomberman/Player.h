@@ -15,10 +15,10 @@ public:
 	Player(Board* board, const double& board_x, const double& board_y, int id, ActionLog *action_log,Communicator *communicator);
 	~Player();
 
-	double exact_x;
-	double exact_y;
-	double speed_x = 0;
-	double speed_y = 0;
+	float exact_x;
+	float exact_y;
+	float speed_x = 0;
+	float speed_y = 0;
 
 	void setId(int value)
 	{
@@ -30,11 +30,11 @@ public:
 		return id;
 	}
 
-	double max_speed = 3;
+	float max_speed = 3;
 
-	double acceleration = 50;
+	float acceleration = 50;
 
-	double friction = 10;
+	float friction = 10;
 
 	Steering *steering;
 

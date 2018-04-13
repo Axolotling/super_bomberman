@@ -19,7 +19,7 @@ public:
 	Board *board;
 	int picture_slice_width;
 	int picture_slice_height;
-	double grid_cell_side = 30;
+	float grid_cell_side = 30;
 #define psw picture_slice_width
 #define psh picture_slice_height
 	sf::Texture *texture = new sf::Texture;

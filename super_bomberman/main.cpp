@@ -3,7 +3,7 @@
 
 int main()
 {
-	srand(time(0));
+	srand(time(nullptr));
 	Bomberman bomberman;
 	system("pause");
 }

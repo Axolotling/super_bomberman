@@ -10,8 +10,8 @@ Player::Player(Board* board, const double& board_x, const double& board_y, int i
 {
 	this->communicator = communicator;
 	setId(id);
-	exact_x = board_x;
-	exact_y = board_y;
+	exact_x = (board_x);
+	exact_y = (board_y);
 	this->action_log = action_log;
 	//std::cout << "Created Player Object" << std::endl;
 	if (!texture->loadFromFile("player.png"))
@@ -32,11 +32,11 @@ void Player::make_speed_smaller_or_equal_max()
 {
 	if (speed_x * speed_y != 0)
 	{
-		double speed = sqrt(speed_x * speed_x + speed_y * speed_y);
+		float speed = sqrt(speed_x * speed_x + speed_y * speed_y);
 
 		if (speed > max_speed)
 		{
-			double S = max_speed / speed;
+			float S = max_speed / speed;
 			speed_x = speed_x * S;
 			speed_y = speed_y * S;
 		}
@@ -101,30 +101,30 @@ bool Player::is_object_on_field(int checked_x, int checked_y)
 
 bool Player::is_there_collision_on_the_right()
 {
-	if (is_object_on_field(exact_x + 1.0, exact_y + epsilon)) return true;
-	if (is_object_on_field(exact_x + 1.0, exact_y + 1.0 - epsilon)) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + 1.0), static_cast<int>(exact_y + epsilon))) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + 1.0), static_cast<int>(exact_y + 1.0 - epsilon))) return true;
 	return false;
 }
 
 
 bool Player::is_there_collision_on_the_left()
 {
-	if (is_object_on_field(exact_x, exact_y + epsilon)) return true;
-	if (is_object_on_field(exact_x, exact_y + 1.0 - epsilon)) return true;
+	if (is_object_on_field(static_cast<int>(exact_x), static_cast<int>(exact_y + epsilon))) return true;
+	if (is_object_on_field(static_cast<int>(exact_x), static_cast<int>(exact_y + 1.0 - epsilon))) return true;
 	return false;
 }
 
 bool Player::is_there_collision_on_the_top()
 {
-	if (is_object_on_field(exact_x + epsilon, exact_y)) return true;
-	if (is_object_on_field(exact_x + 1.0 - epsilon, exact_y)) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + epsilon), static_cast<int>(exact_y))) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + 1.0 - epsilon), static_cast<int>(exact_y))) return true;
 	return false;
 }
 
 bool Player::is_there_collision_on_the_bottom()
 {
-	if (is_object_on_field(exact_x + epsilon, exact_y + 1.0)) return true;
-	if (is_object_on_field(exact_x + 1.0 - epsilon, exact_y + 1.0)) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + epsilon), static_cast<int>(exact_y + 1.0))) return true;
+	if (is_object_on_field(static_cast<int>(exact_x + 1.0 - epsilon), static_cast<int>(exact_y + 1.0))) return true;
 	return false;
 }
 
@@ -172,8 +172,8 @@ void Player::update(sf::Time delta_time)
 			//exact_y += speed_y * delta_time.asSeconds();
 			break;
 		case Steering::BOMB:
-			int bomb_x = exact_x + 0.5;
-			int bomb_y = exact_y + 0.5;
+			int bomb_x = static_cast<int>(exact_x + 0.5);
+			int bomb_y = static_cast<int>(exact_y + 0.5);
 			BoardObject *board_object = board->get_object({ bomb_x, bomb_y });
 			if (board_object == nullptr)
 			{
@@ -196,7 +196,7 @@ void Player::update(sf::Time delta_time)
 	{
 		if (is_there_collision_on_the_right())
 		{
-			exact_x = static_cast<int>(exact_x);
+			exact_x = static_cast<float>(static_cast<int>(exact_x));
 			speed_x = 0;
 		}
 	}
@@ -204,7 +204,7 @@ void Player::update(sf::Time delta_time)
 	{
 		if (is_there_collision_on_the_left()) 
 		{
-			exact_x = static_cast<int>(exact_x + 1.0);
+			exact_x = static_cast<float>(static_cast<int>(exact_x + 1.0));
 			speed_x = 0;
 		}
 	}
@@ -213,14 +213,14 @@ void Player::update(sf::Time delta_time)
 	{
 		if (is_there_collision_on_the_bottom())
 		{
-			exact_y = static_cast<int>(exact_y);
+			exact_y = static_cast<float>(static_cast<int>(exact_y));
 			speed_y = 0;
 		}
 	}
 	else
 	{
-		if (is_there_collision_on_the_top()) {
-			exact_y = static_cast<int>(exact_y + 1.0);
+		if (is_there_collision_on_the_top()) {			
+			exact_y = static_cast<float>(static_cast<int>(exact_y + 1.0));
 			speed_y = 0;
 		}
 	}

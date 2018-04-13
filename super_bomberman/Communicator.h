@@ -11,7 +11,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFLEN 512            
-#define IP_ADDRESS "153.19.211.51"
+#define IP_ADDRESS "192.168.43.79"
 #define DEFAULT_PORT "3504"
 
 class Communicator
@@ -26,10 +26,8 @@ class Communicator
 
 	std::string recieved_message;
 	std::queue<std::string> recieved_messages;
-	
-	
 
-
+	//dane adresowe do komunikacji sieciowej
 	WSAData wsa_data;
 	struct addrinfo *result = NULL, *ptr = NULL, hints;
 	std::string sent_message = "";

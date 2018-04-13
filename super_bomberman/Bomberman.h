@@ -14,7 +14,7 @@ public:
 	Bomberman()
 	{		
 		Communicator *communicator = new Communicator;
-		communicator->get_message();
+		//communicator->get_message();
 
 
 

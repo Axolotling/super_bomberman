@@ -5,6 +5,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <list>
 #include "ActionLog.h"
+#include "Board.h"
+#include "Bomb.h"
 
 class ServerSteering : public Steering
 {
@@ -75,8 +77,7 @@ public:
 					if (board->get_object({ x, y }) == nullptr)
 					{
 						board->set_object({ x, y }, new Bomb(board, x, y));
-					}
-					
+					}					
 				}
 					break;
 				
@@ -87,9 +88,6 @@ public:
 				}
 			//	while (recieved_message[i] != ';') i++;
 				
-					
-				
-
 			}
 			/*
 			int x = 1;
@@ -111,7 +109,6 @@ public:
 			*/
 		}
 	}
-
 
 	std::list<Action> determine_action() override
 	{

@@ -12,22 +12,22 @@ class ActionLog
 public:
 	float get_current_pos_x() const
 	{
-		return current_pos_x;
+		return static_cast<float>(current_pos_x);
 	}
 
 	void set_current_pos_x(float current_pos_x)
 	{
-		this->current_pos_x = current_pos_x;
+		this->current_pos_x = static_cast<int>(current_pos_x);
 	}
 
 	float get_current_pos_y() const
 	{
-		return current_pos_y;
+		return static_cast<float>(current_pos_y);
 	}
 
 	void set_current_pos_y(float current_pos_y)
 	{
-		this->current_pos_y = current_pos_y;
+		this->current_pos_y = static_cast<int>(current_pos_y);
 	}
 
 	enum Communicate

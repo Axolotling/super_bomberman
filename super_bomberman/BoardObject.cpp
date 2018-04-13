@@ -4,8 +4,8 @@
 BoardObject::BoardObject(Board* board, const int& board_x, const int& board_y, bool can_be_broken, bool can_be_collided)
 {
 	//std::cout << "Created BoardObject Object" << std::endl;
-	this->board_x = board_x;
-	this->board_y = board_y;
+	this->board_x = static_cast<int>(board_x);
+	this->board_y = static_cast<int>(board_y);
 	this->can_be_broken = can_be_broken;
 	this->can_be_collided = can_be_collided;
 	this->board = board;
