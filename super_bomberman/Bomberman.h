@@ -17,10 +17,7 @@ public:
 		//communicator->get_message();
 
 		//nieskonczony while z ifem get_current_players_number -> break
-		while(true)
-		{
-			if (communicator->get_current_player_number() == 2) break;
-		}
+		
 
 		int window_height = 720; 
 		int window_width = 1080;
@@ -37,6 +34,8 @@ public:
 
 		Scene *scene = new Scene;
 		Board* board = new Board(3, &action_log, communicator);
+
+		
 
 		scene->add(board);
 

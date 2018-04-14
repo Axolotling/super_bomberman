@@ -20,6 +20,7 @@ void Communicator::proccess_other_players(client_type& new_client)
 			if (iResult != SOCKET_ERROR) 
 			{
 				//wyswietl otrzymana wiadomosc
+				std::cout << "Otrzymana wiadomosc od serwera to: " << std::endl;
 				std::cout << new_client.received_message << std::endl; 
 				//wrzuc do kolejki do przetwarzania otrzymywanych wiadomosci
 				recieved_messages.push(new_client.received_message);

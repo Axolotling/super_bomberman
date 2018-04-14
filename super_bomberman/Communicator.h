@@ -11,7 +11,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFLEN 512            
-#define IP_ADDRESS "42.0.135.38"
+#define IP_ADDRESS "localhost"
 #define DEFAULT_PORT "3504"
 
 class Communicator
@@ -37,6 +37,11 @@ class Communicator
 	std::string message;
 
 public:
+	client_type* get_client()
+	{
+		return &this->client;
+	}
+
 	std::string pop_first_recieved_message()
 	{
 		std::string result = recieved_messages.front();

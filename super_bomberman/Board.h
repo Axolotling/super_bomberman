@@ -30,18 +30,53 @@ public:
 		this->board_height = 20;
 		generating_map();
 		assert(n_players != 0);//sprawdzenie liczby graczy i ich dodawanie
-		add_local_player(1, 1, 0, action_log, communicator);
+		int x, y;
+		//pobieramy id gracza z serwera
+		int id = communicator->get_client()->id;
+
+		//tworzymy pozostalych graczy na odpowiednich polach
+		for(int i=0;i<=n_players;i++)
+		{
+			switch (i)
+			{
+			case 0:
+				x = 1;
+				y = 1;
+				break;
+			case 1:
+				x = this->board_width - 2;
+				y = this->board_height - 2;
+				break;
+			case 2:
+				x = this->board_width - 2;
+				y = 1;
+				break;
+			case 3:
+				x = 1;
+				y = this->board_height - 2;
+				break;
+			}
+			if(i!=id) add_player(x, y, i, nullptr, communicator);
+			//ustawiamy naszego gracza na swojej pozycji
+			else add_local_player(x, y, id, action_log, communicator);
+		}
+		
+		/*
+		
 		if (n_players > 1)
 		{
-			add_player(this->board_width - 2, this->board_height - 2, 0, action_log,communicator);
+			//
+			add_player(this->board_width - 2, this->board_height - 2, 1, action_log,communicator);
 		}
 		if (n_players > 2)
 		{
+			//
 			add_player(this->board_width - 2, 1, 2, action_log, communicator);
 		}
 		if (n_players > 3) {
 			add_player(1, this->board_height - 2, 3, action_log, communicator);
 		}
+		*/
 	}
 
 	Communicator* get_communicator()
