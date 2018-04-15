@@ -193,6 +193,7 @@ Communicator::~Communicator()
 	close_connection();
 }
 
+//obecna liczba graczy w grze
 int Communicator::get_current_player_number()
 {
 	return this->current_player_numbers;

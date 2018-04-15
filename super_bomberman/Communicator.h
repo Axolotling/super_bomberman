@@ -49,6 +49,11 @@ public:
 		return result;
 	}
 
+	void push_message(std::string message)
+	{
+		recieved_messages.push(message);
+	}
+
 	/*std::queue<std::string>* pop_first_recieved_messages_list()
 	{
 		return &recieved_messages;

@@ -16,12 +16,13 @@ class ServerSteering : public Steering
 	Board *board;
 public:
 
-	void ServerSteering::parse_message(std::string recieved_message)
+	void ServerSteering::parse_message()
 	{
+		std::string recieved_message = board->get_communicator()->pop_first_recieved_message();
 		std::string temp = recieved_message.substr(0, 1);
 		int id = atoi(temp.data());
 		if (id > this->board->get_communicator()->get_current_player_number()) this->board->get_communicator()->set_current_player_number(id);
-		if (id != playerid)
+		if (id == playerid)
 		{
 			cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
 			int parsed_int;
@@ -31,7 +32,7 @@ public:
 				std::string parsed_string = recieved_message.substr(i, i+2);
 				parsed_int = atoi(parsed_string.data());
 
-				cout << "parsowany rozkaz to " << parsed_int << endl;
+				cout << "parsowany rozkaz ma nr: " << parsed_int << endl;
 
 				i += 3;
 				switch (static_cast<ActionLog::Communicate>(parsed_int)) {
@@ -114,7 +115,7 @@ public:
 		}
 		else
 		{
-			
+			board->get_communicator()->push_message(recieved_message);
 		}
 	}
 

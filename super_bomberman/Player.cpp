@@ -14,6 +14,7 @@ Player::Player(Board* board, const double& board_x, const double& board_y, int i
 	exact_y = (board_y);
 	this->action_log = action_log;
 	//std::cout << "Created Player Object" << std::endl;
+	cout << "Utworzona gracza na pozycji " << exact_x << ", " << exact_y << ", id: " << id <<endl;
 	if (!texture->loadFromFile("player.png"))
 	{
 		std::cout << "Grafika obiektu siê nie za³adowa³a";
@@ -132,19 +133,19 @@ void Player::update(sf::Time delta_time)
 {
 	if(ServerSteering *server_steering = dynamic_cast<ServerSteering*>(steering))
 	{
-		string message;
-		while (!communicator->is_message_list_empty())
-		{
-			message = communicator->pop_first_recieved_message();
-			if (!message.empty())
-			{
-				server_steering->parse_message(message);
-			}
-			else
-			{
-				cout << "Otrzymalismy pusta wiadomosc :/" << endl;
-			}
-		}
+		//string message;
+		//while (!communicator->is_message_list_empty())
+		//{
+			//message = communicator->pop_first_recieved_message();
+			//if (!message.empty())
+			//{
+				if(!communicator->is_message_list_empty()) server_steering->parse_message();
+			//}
+			//else
+			//{
+				//cout << "Otrzymalismy pusta wiadomosc :/" << endl;
+			//}
+		//}
 
 		/*
 		if (!communicator->is_message_empty())
