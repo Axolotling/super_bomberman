@@ -25,7 +25,8 @@ public:
 
 		std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow(sf::VideoMode(window_width, window_height), "Bomberman"));
 		window->setFramerateLimit(framerate);
-		ActionLog action_log(1);
+		
+		ActionLog action_log(communicator->get_client()->id);
 
 
 		sf::Event event;

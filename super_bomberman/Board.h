@@ -56,7 +56,7 @@ public:
 				y = this->board_height - 2;
 				break;
 			}
-			if(i!=id) add_player(x, y, i, nullptr, communicator);
+			if(i!=id) add_player(x, y, i, action_log, communicator);
 			//ustawiamy naszego gracza na swojej pozycji
 			else add_local_player(x, y, id, action_log, communicator);
 		}

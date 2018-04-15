@@ -72,7 +72,7 @@ void Communicator::get_message()
 
 bool Communicator::connect_to_server()
 {
-	std::cout << "Starting Client...\n";
+	std::cout << "Tworzenie nowego klienta...\n";
 
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsa_data);
@@ -87,7 +87,7 @@ bool Communicator::connect_to_server()
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	std::cout << "Connecting...\n";
+	std::cout << "Laczenie...\n";
 
 	// Resolve the server address and port
 	iResult = getaddrinfo(IP_ADDRESS, DEFAULT_PORT, &hints, &result);
@@ -133,7 +133,7 @@ bool Communicator::connect_to_server()
 		return 1;
 	}
 
-	std::cout << "Successfully Connected" << std::endl;
+	std::cout << "Pomyslnie polaczono z serwerem!" << std::endl;
 
 	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	//Obtain id from server for this client;	
@@ -147,9 +147,11 @@ bool Communicator::connect_to_server()
 void Communicator::get_player_id_from_server()
 {
 	//odebranie id gracza od serwera
+	std::cout << "Pobieram z serwera moje id" << std::endl;
 	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
 	message = client.received_message;
 	client.id = atoi(client.received_message);
+
 	if (message != "Server is full"){
 
 		//tworzenie watku do odbierania wiadomosci od pozostalych graczy

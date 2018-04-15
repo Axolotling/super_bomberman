@@ -21,7 +21,7 @@ public:
 		std::string temp = recieved_message.substr(0, 1);
 		int id = atoi(temp.data());
 		if (id > this->board->get_communicator()->get_current_player_number()) this->board->get_communicator()->set_current_player_number(id);
-		if (id == playerid)
+		if (id != playerid)
 		{
 			cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
 			int parsed_int;
@@ -61,17 +61,18 @@ public:
 					break;
 				case ActionLog::put_bomb: {
 					int j = i;
-					
+					cout << "Wykryto bombe do postawienia" << endl;
 					while (recieved_message[j] != ';') j++;
 					parsed_string = recieved_message.substr(i, j);
-					parsed_int = atoi(parsed_string.data());
+					parsed_int = static_cast<int>(atof(parsed_string.data()));
 					//uzywamy x
 					int x = parsed_int;
 					j++;
 					i = j;
 					while (recieved_message[j] != ';') j++;
+					
 					parsed_string = recieved_message.substr(i, j);
-					parsed_int = atoi(parsed_string.data());
+					parsed_int = static_cast<int>(atof(parsed_string.data()));
 					int y = parsed_int;
 					i = j;
 					i++;
