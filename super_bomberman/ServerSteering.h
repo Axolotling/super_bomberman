@@ -65,7 +65,7 @@ public:
 					cout << "Wykryto bombe do postawienia" << endl;
 					while (recieved_message[j] != ';') j++;
 					parsed_string = recieved_message.substr(i, j);
-					parsed_int = static_cast<int>(atof(parsed_string.data()));
+					parsed_int = atoi(parsed_string.data());
 					//uzywamy x
 					int x = parsed_int;
 					j++;
@@ -73,7 +73,7 @@ public:
 					while (recieved_message[j] != ';') j++;
 					
 					parsed_string = recieved_message.substr(i, j);
-					parsed_int = static_cast<int>(atof(parsed_string.data()));
+					parsed_int = atoi(parsed_string.data());
 					int y = parsed_int;
 					i = j;
 					i++;

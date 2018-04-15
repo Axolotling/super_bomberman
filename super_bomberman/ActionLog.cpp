@@ -40,9 +40,9 @@ std::string ActionLog::communicate_to_string(Communicate communicate)
 		return std::to_string(communicate) + ";";
 		break;
 	case put_bomb:
-		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x()+0.5)+';'+ std::to_string(get_current_pos_y()+0.5)+';';
+		return std::to_string(communicate) + ";" + std::to_string(static_cast<int>(get_current_pos_x()+0.5))+';'+ std::to_string(static_cast<int>(get_current_pos_y()+0.5))+';';
 	case get_bonus:
-		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x()+0.5) + ';' + std::to_string(get_current_pos_y()+0.5) + ';';
+		return std::to_string(communicate) + ";" + std::to_string(static_cast<int>(get_current_pos_x()+0.5)) + ';' + std::to_string(static_cast<int>(get_current_pos_y()+0.5)) + ';';
 	case kill_player:
 	default: ;
 	}
