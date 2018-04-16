@@ -84,9 +84,8 @@ public:
 						{
 							board->set_object({ x, y }, new Bomb(board, x, y));
 						}
+						break;
 					}
-											  break;
-
 					case ActionLog::erase_crate: break;
 					case ActionLog::get_bonus: break;
 					case ActionLog::kill_player: break;
