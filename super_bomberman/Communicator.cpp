@@ -152,6 +152,11 @@ void Communicator::get_player_id_from_server()
 	message = client.received_message;
 	client.id = atoi(client.received_message);
 
+	std::cout << "Pobieram z serwera seed do mapy" << std::endl;
+	recv(client.socket, client.received_message, DEFAULT_BUFLEN, 0);
+	message = client.received_message;
+	set_seed(atoi(client.received_message));
+
 	if (message != "Server is full"){
 
 		//tworzenie watku do odbierania wiadomosci od pozostalych graczy

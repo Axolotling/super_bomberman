@@ -11,7 +11,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFLEN 512            
-#define IP_ADDRESS "localhost"
+#define IP_ADDRESS "192.168.43.46"
 #define DEFAULT_PORT "3504"
 
 class Communicator
@@ -19,10 +19,12 @@ class Communicator
 	struct client_type
 	{
 		SOCKET socket;
-		int id;
+		int id;		
 		char received_message[DEFAULT_BUFLEN];
 		//client_type(){}
 	};
+
+	int seed;
 
 	std::string recieved_message;
 	std::queue<std::string> recieved_messages;
@@ -40,6 +42,16 @@ public:
 	client_type* get_client()
 	{
 		return &this->client;
+	}
+
+	int get_seed()
+	{
+		return  this->seed;
+	}
+
+	void set_seed(int seed)
+	{
+		this->seed = seed;
 	}
 
 	std::string pop_first_recieved_message()

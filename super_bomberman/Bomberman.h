@@ -15,7 +15,7 @@ public:
 	{		
 		Communicator *communicator = new Communicator;
 		//communicator->get_message();
-
+		srand(communicator->get_seed());
 		//nieskonczony while z ifem get_current_players_number -> break
 		
 

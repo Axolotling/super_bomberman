@@ -18,7 +18,7 @@ struct client_type
 };
 
 const char OPTION_VALUE = 1;
-const int MAX_CLIENTS = 5;
+const int MAX_CLIENTS = 3;
 
 //Function Prototypes
 int process_client(client_type &new_client, std::vector<client_type> &client_array, std::thread &thread);
@@ -55,6 +55,7 @@ int process_client(client_type &new_client, std::vector<client_type> &client_arr
 			}
 			else
 			{
+				//wysylanie informacji o rozlaczeniu sie klienta (DO MODYFIKACJI JESZCZE)
 				msg = "Klient #" + std::to_string(new_client.id) + " rozlaczyl sie.";
 
 				std::cout << msg << std::endl;
@@ -162,11 +163,16 @@ int main() {
 			//wyslij id do clienta w celu pozniejszej indentyfikacji
 			std::cout << "Klient #" << client[temp_id].id << ": polaczony pomyslnie" << std::endl;
 			msg = std::to_string(client[temp_id].id);
+			//
 			send(client[temp_id].socket, msg.c_str(), strlen(msg.c_str()), 0);
-			for(int i=0; i<num_clients; i++)
+			for (int i = 0; i<num_clients; i++)
 			{
-				if(i!=temp_id) send(client[i].socket, msg.c_str(), strlen(msg.c_str()), 0);
-			}			
+				
+					if (i != temp_id) {
+						std::cout << "Wyslano do gracza " << i << " identyfikator nowego gracza: " << temp_id << std::endl;
+						send(client[i].socket, msg.c_str(), strlen(msg.c_str()), 0);
+					}
+			}
 
 			//utworz watek dla tego clienta
 			my_thread[temp_id] = std::thread(process_client, std::ref(client[temp_id]), std::ref(client), std::ref(my_thread[temp_id]));
