@@ -18,6 +18,7 @@ public:
 
 	void ServerSteering::parse_message()
 	{
+
 		while (!board->get_communicator()->is_message_list_empty()) {
 			std::string recieved_message = board->get_communicator()->pop_first_recieved_message();
 			std::string temp = recieved_message.substr(0, 1);
@@ -31,6 +32,7 @@ public:
 				for (int i = 2; i < recieved_message.length();) {
 
 					std::string parsed_string = recieved_message.substr(i, i + 2);
+
 					parsed_int = atoi(parsed_string.data());
 
 					cout << "parsowany rozkaz ma nr: " << parsed_int << endl;
@@ -92,34 +94,22 @@ public:
 					}
 
 
-					//	while (recieved_message[i] != ';') i++;
 
 				}
-				/*
-				int x = 1;
-
-				for (int i = 0; i < recieved_message.length(); i++)
-				{
-					recieved_message[i] == ';';
-				}
-
-				set_was_down_key_pressed(true);
-				while (x--)
-				{
-					int i = 1;
-					//cout << "hehe " << endl;
-					//if (recieved_message[i] == ';')
-
-
-				}
-				*/
+				
 			}
 			else
 			{
 				board->get_communicator()->push_message(recieved_message);
 				break;
 			}
+
+				
+			
+			
+			
 		}
+	
 	}
 
 	std::list<Action> determine_action() override
