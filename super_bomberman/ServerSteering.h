@@ -20,9 +20,9 @@ public:
 	{
 		std::string recieved_message = board->get_communicator()->pop_first_recieved_message();
 		std::string temp = recieved_message.substr(0, 1);
-		int id = atoi(temp.data());
+		int id = temp[0];
 		if (id > this->board->get_communicator()->get_current_player_number()) this->board->get_communicator()->set_current_player_number(id);
-		if (id == playerid)
+		if (true)//id == playerid)
 		{
 			cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
 			int parsed_int;
@@ -90,28 +90,11 @@ public:
 				default:;
 				}
 
-
-			//	while (recieved_message[i] != ';') i++;
+\
 				
 			}
-			/*
-			int x = 1;
-
-			for (int i = 0; i < recieved_message.length(); i++)
-			{
-				recieved_message[i] == ';';
-			}
-
-			set_was_down_key_pressed(true);
-			while (x--)
-			{
-				int i = 1;
-				//cout << "hehe " << endl;
-				//if (recieved_message[i] == ';')
-
-				
-			}
-			*/
+			
+			
 		}
 		else
 		{

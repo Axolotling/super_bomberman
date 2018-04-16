@@ -64,6 +64,12 @@ public:
 	
 	bool is_message_list_empty()
 	{
+		if (recieved_messages.empty() == false)
+		{
+			//just for debug
+			int x = 2;
+		};
+
 		return recieved_messages.empty();
 	}
 
