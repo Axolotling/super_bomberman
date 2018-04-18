@@ -108,7 +108,7 @@ public:
 						i++;
 						for (Player *p : board->get_players_list())
 						{
-							if (p->getId() == playerid) p->set_xy(x, y);
+							if (p->getId() == id) p->set_xy(x, y);
 						}
 						
 						break;
