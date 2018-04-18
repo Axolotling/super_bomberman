@@ -19,22 +19,23 @@ public:
 	{
 		std::list<Action> actions;
 
-
+		//action_log.push_communicate(action_log.communicate_to_string(ActionLog::update_position));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
+			action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_pressed));
 			if (get_was_left_key_pressed() == false)
 			{
-				//add communicate
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_pressed));			
+				//add communicate							
 				set_was_left_key_pressed(true);
-			}
+			}			
 			actions.push_front(GO_LEFT);
 		}
 		else
 		{
+			
 			if (get_was_left_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_released));
+				//action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_left_released));
 			}
 			set_was_left_key_pressed(false);
 		}
@@ -42,10 +43,11 @@ public:
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
+			action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_pressed));
 			if (get_was_right_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_pressed));
+				
 				set_was_right_key_pressed(true);
 			}
 			actions.push_front(GO_RIGHT);
@@ -54,7 +56,7 @@ public:
 		{
 			if (get_was_right_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_released));
+				//action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_right_released));
 			}
 			set_was_right_key_pressed(false);
 		}
@@ -62,10 +64,11 @@ public:
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
+			action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_pressed));
 			if (get_was_up_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_pressed));
+				
 				set_was_up_key_pressed(true);
 			}
 			actions.push_front(GO_UP);
@@ -74,7 +77,7 @@ public:
 		{
 			if (get_was_up_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_released));
+				//action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_up_released));
 			}
 			set_was_up_key_pressed(false);
 		}		
@@ -82,10 +85,11 @@ public:
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
+			action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_pressed));
 			if (get_was_down_key_pressed() == false)
 			{
 				//add communicate
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_pressed));
+				
 				set_was_down_key_pressed(true);
 			}
 			actions.push_front(GO_DOWN);
@@ -94,7 +98,7 @@ public:
 		{
 			if (get_was_down_key_pressed() == true)
 			{
-				action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_released));
+				//action_log->push_communicate(action_log->communicate_to_string(ActionLog::key_down_released));
 			}
 			set_was_down_key_pressed(false);
 		}

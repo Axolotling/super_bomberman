@@ -47,7 +47,7 @@ std::string ActionLog::communicate_to_string(Communicate communicate)
 	case kill_player:
 		break;
 	case update_position:
-		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x() + 0.5) + ';' + std::to_string(get_current_pos_y() + 0.5) + ';';
+		return std::to_string(communicate) + ";" + std::to_string(get_current_pos_x()) + ';' + std::to_string(get_current_pos_y()) + ';';
 	default: ;
 	}
 }

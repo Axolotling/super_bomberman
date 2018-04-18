@@ -29,6 +29,8 @@ public:
 				cout << "Parsujemy o taka wiadomosc: " << recieved_message << ", wiemy ze id playera to " << id << endl;
 				int parsed_int;
 
+				bool d, u, l, r;
+				d=u=l=r=0;
 				for (int i = 2; i < recieved_message.length();) {
 
 					std::string parsed_string = recieved_message.substr(i, i + 2);
@@ -41,15 +43,19 @@ public:
 					switch (static_cast<ActionLog::Communicate>(parsed_int)) {
 					case ActionLog::key_up_pressed:
 						set_was_up_key_pressed(true);
+						u = 1;
 						break;
 					case ActionLog::key_down_pressed:
 						set_was_down_key_pressed(true);
+						d = 1;
 						break;
 					case ActionLog::key_left_pressed:
 						set_was_left_key_pressed(true);
+						l = 1;
 						break;
 					case ActionLog::key_right_pressed:
 						set_was_right_key_pressed(true);
+						r = 1;
 						break;
 					case ActionLog::key_up_released:
 						set_was_up_key_pressed(false);
@@ -114,11 +120,15 @@ public:
 						break;
 					}
 					default:;
-					}
-
+					}				
 
 
 				}
+				if (!u) set_was_up_key_pressed(false);
+				if (!d) set_was_down_key_pressed(false);
+				if (!l) set_was_left_key_pressed(false);
+				if (!r) set_was_right_key_pressed(false);
+
 				
 			}
 			else
