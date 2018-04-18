@@ -43,7 +43,8 @@ public:
 		put_bomb,
 		erase_crate,
 		get_bonus,
-		kill_player
+		kill_player,
+		update_position
 	};
 	
 

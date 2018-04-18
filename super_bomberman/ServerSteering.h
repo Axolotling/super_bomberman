@@ -89,6 +89,30 @@ public:
 					case ActionLog::erase_crate: break;
 					case ActionLog::get_bonus: break;
 					case ActionLog::kill_player: break;
+					case ActionLog::update_position: {
+						int j = i;
+						float parsed_float;
+						while (recieved_message[j] != ';') j++;
+						parsed_string = recieved_message.substr(i, j);
+						parsed_float = atof(parsed_string.data());
+						//uzywamy x
+						float x = parsed_float;
+						j++;
+						i = j;
+						while (recieved_message[j] != ';') j++;
+
+						parsed_string = recieved_message.substr(i, j);
+						parsed_int = atof(parsed_string.data());
+						float y = parsed_float;
+						i = j;
+						i++;
+						for (Player *p : board->get_players_list())
+						{
+							if (p->getId() == playerid) p->set_xy(x, y);
+						}
+						
+						break;
+					}
 					default:;
 					}
 

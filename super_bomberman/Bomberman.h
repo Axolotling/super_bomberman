@@ -57,6 +57,7 @@ public:
 					cout << "Wyslanie nie powiodlo sie :(" << endl;
 				};
 				action_log.clear_communicates_to_send();
+				action_log.push_communicate(action_log.communicate_to_string(ActionLog::update_position));
 			}
 
 		

@@ -197,6 +197,11 @@ public:
 		sheduled_for_deletion.push(board_object);
 	}
 
+	list<Player*> get_players_list() const
+	{
+		return players;
+	}
+
 private:
 	map<pair<int, int>, BoardObject*>board;
 	map<pair<int, int>, BoardObject*>::iterator it;
@@ -204,6 +209,7 @@ private:
 	int board_width;
 	int board_height;
 	list<Player*> players;
+
 	queue<BoardObject*> sheduled_for_deletion;
 
 	void delete_sheduled_objects()

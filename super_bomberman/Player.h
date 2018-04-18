@@ -53,5 +53,7 @@ public:
 
 	void update(sf::Time delta_time) override;
 
+	void set_xy(float x,float y);
+
 };
 

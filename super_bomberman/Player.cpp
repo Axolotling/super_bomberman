@@ -230,3 +230,9 @@ void Player::update(sf::Time delta_time)
 	sf::Sprite* sprite = static_cast<sf::Sprite*>(drawable);
 	sprite->setPosition(grid_cell_side * exact_x, grid_cell_side * exact_y);
 }
+
+void Player::set_xy(float x, float y)
+{
+	this->exact_x = x;
+	this->exact_y = y;
+}
