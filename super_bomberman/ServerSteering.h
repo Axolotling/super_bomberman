@@ -40,7 +40,7 @@ public:
 					if (parsed_int < 10 && parsed_string[i+1]=='_') {
 					cout << "Blednie odebrany rozkaz" << endl;
 					//
-					string tmp1 = recieved_message.substr(i, strlen(recieved_message.data()));
+					string tmp1 = recieved_message.substr(i, recieved_message.length()-i);
 					board->get_communicator()->push_message(tmp1);
 					break;
 					}
