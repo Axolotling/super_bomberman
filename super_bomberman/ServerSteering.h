@@ -37,6 +37,11 @@ public:
 
 					parsed_int = atoi(parsed_string.data());
 
+					if (parsed_int < 10) {
+						cout << "Blednie odebrany rozkaz" << endl;
+						break;
+					}
+
 					cout << "parsowany rozkaz ma nr: " << parsed_int << endl;
 
 					i += 3;
