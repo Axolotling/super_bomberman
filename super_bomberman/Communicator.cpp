@@ -8,6 +8,8 @@
 #include <thread>
 #include "ServerSteering.h"
 
+
+
 void Communicator::proccess_other_players(client_type& new_client)
 {
 	while (1) {
@@ -22,6 +24,15 @@ void Communicator::proccess_other_players(client_type& new_client)
 				//wyswietl otrzymana wiadomosc
 				std::cout << "Otrzymana wiadomosc od serwera to: " << std::endl;
 				std::cout << new_client.received_message << std::endl; 
+
+				for (int i = 2; i < std::strlen(new_client.received_message); i++)
+				{
+					if (new_client.received_message[i] == '_')
+					{
+						std::cout << "Wiele komunikatow polaczone w jeden :o" << endl;
+					}
+				}
+
 				//wrzuc do kolejki do przetwarzania otrzymywanych wiadomosci
 				recieved_messages.push(new_client.received_message);
 

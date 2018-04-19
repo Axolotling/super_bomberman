@@ -7,7 +7,7 @@ std::string ActionLog::create_final_message_from_list()
 	std::cout << "created final communicate: ";
 	std::string result;
 	result = std::to_string(playerid); //+getPlayerId
-	result += ";";
+	result += "_";
 	for (std::string one_string : communicates_to_send)
 	{
 		result += one_string;

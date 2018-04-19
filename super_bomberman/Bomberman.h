@@ -40,7 +40,7 @@ public:
 
 		scene->add(board);
 
-
+		float last_send_time = clock.getElapsedTime().asSeconds();
 		
 		float remembered_time = clock.getElapsedTime().asSeconds();
 		while (window->isOpen())
@@ -49,6 +49,8 @@ public:
 			last_update_time = clock.getElapsedTime();
 
 			while (window->pollEvent(event))	if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window->close();
+
+
 
 			if (!action_log.is_empty())
 			{

@@ -37,8 +37,9 @@ public:
 
 					parsed_int = atoi(parsed_string.data());
 
-					if (parsed_int < 10) {
+					if (parsed_int < 10 && parsed_string[i+1]=='_') {
 						cout << "Blednie odebrany rozkaz" << endl;
+						//
 						break;
 					}
 
