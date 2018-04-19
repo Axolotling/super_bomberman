@@ -33,11 +33,11 @@ public:
 				d=u=l=r=0;
 				for (int i = 2; i < recieved_message.length();) {
 
-					std::string parsed_string = recieved_message.substr(i, i + 2);
+					std::string parsed_string = recieved_message.substr(i, 2);
 
 					parsed_int = atoi(parsed_string.data());
 
-					if (parsed_int < 10 && parsed_string[i+1]=='_') {
+					if (parsed_int < 10 /*&& parsed_string[i+1]=='_'*/) {
 					cout << "Blednie odebrany rozkaz" << endl;
 					//
 					string tmp1 = recieved_message.substr(i, recieved_message.length()-i);
