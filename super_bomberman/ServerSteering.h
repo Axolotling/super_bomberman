@@ -129,10 +129,10 @@ public:
 
 
 				}
-				if (!u || true) set_was_up_key_pressed(false);
-				if (!d || true) set_was_down_key_pressed(false);
-				if (!l || true) set_was_left_key_pressed(false);
-				if (!r || true) set_was_right_key_pressed(false);
+				if (!u) set_was_up_key_pressed(false);
+				if (!d) set_was_down_key_pressed(false);
+				if (!l) set_was_left_key_pressed(false);
+				if (!r) set_was_right_key_pressed(false);
 
 				
 			}
